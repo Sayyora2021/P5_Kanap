@@ -1,27 +1,57 @@
 //variable = section  html #items
-//const itemsTag = document.getElementById("items")
+const itemsTag = document.getElementById("items")
 
 // la fonction qui va récupérer les données de l'API
+const getData = function(){
 fetch("http://localhost:3000/api/products")
 //récupération des données de lAPI dans response.json
 .then((response) => response.json())
-.then((data) => {
- console.log(data)
- return addProducts(data)
-})
+.then(function(value) {
+ sessionStorage.setItem("data", JSON.stringify(value))
+ displayItems(value)
+ console.log(value)
+ })
+}
 
- function addProducts(data){
+// appel de la fonction d'affichage
+const displayItems = function (value){
+ items.innerHTML = ""
+ for (let product of value){
+
+  items.innerHTML +=
+  (`<a href="./product.html?id==$(product._id">
+  <article> <img src="${product.imageUrl}" alt="$product.name">
+  <h3 class='productName'>${product.name}</h3>
+  <p class="productDescription">${product.description}</p>
+</article></a>`);
+ }
+}
+if(sessionStorage.getItem("data") !== null){
+const dataSession = JSON.parse(sessionSorage.getItem("data"));
+console.log(dataSession)
+displayItems(dataSession)
+}
+else{
+ getData();
+}
+ /*function addProducts(data){
   //_id récupéré dépuis console
  const id = data[0]._id
+ console.log(id)
  const anchor = makeAnchor(id)
  appendChildren (anchor)
  }
+
  function makeAnchor(id){
-// création d'un element (img) 
+// création d'un element  
  const anchor = document.createElement("a")
  anchor.href = "./product.html?id=" + id
  return anchor
  }
+
+ // on recupere la balise section
+ const sectionId = document.getElementById('items')
+console.log(sectionId)
 
  function appendChildren(anchor){
 const items = document.querySelector("#items")
@@ -29,12 +59,24 @@ if (items != null){
  items.appendChild(anchor)
 }
 }
+// On creer la balise a
+let a = document.createElement('a')
+// on creer l'attribut de la balise
+a.setAttribute('href','./product.html?id=42')
+// parent.appendChild('enfant')
+sectionId.appendChild(a)
 
 
+// On recupere les données dans un array
+// On parcour se tableau
+// Pour chaque produit
+// on creer les balises et attribut adéquat
 
-
-
-
-
-
- 
+//InnertHtml
+/*parent.innertHtml =  <a href="./product.html?id=42">
+            <article>
+            <img src=".../product01.jpg" alt="Lorem ipsum dolor sit amet, Kanap name1"></img>
+            <h3 class="productName">Kanap name1</h3>
+            <p class="productDescription">Dis enim malesuada risus sapien gravida nulla nisl arcu. Dis enim malesuada risus sapien gravida nulla nisl arcu.</p>
+          </article>
+        </a> */
