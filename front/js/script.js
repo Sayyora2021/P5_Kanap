@@ -17,7 +17,7 @@ fetch("http://localhost:3000/api/products")
 const displayItems = function (value){
  items.innerHTML = ""
  for (let product of value){
-
+//innerHTML rècupère la section items avec les enfants
   items.innerHTML +=
   (`<a href="./product.html?id==$(product._id">
   <article> <img src="${product.imageUrl}" alt="$product.name">
