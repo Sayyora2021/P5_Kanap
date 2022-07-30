@@ -2,16 +2,16 @@
 const itemsTag = document.getElementById("items")
 
 // la fonction qui va récupérer les données de l'API
-const getData = function(){
+//const getData = function(){
 fetch("http://localhost:3000/api/products")
 //récupération des données de lAPI dans response.json
 .then((response) => response.json())
 .then(function(value) {
- sessionStorage.setItem("data", JSON.stringify(value))
+// sessionStorage.setItem("data", JSON.stringify(value))
  displayItems(value)
  console.log(value)
  })
-}
+//}
 
 // appel de la fonction d'affichage
 const displayItems = function (value){
@@ -19,30 +19,40 @@ const displayItems = function (value){
  for (let product of value){
 //innerHTML rècupère la section items avec les enfants
   items.innerHTML +=
-  (`<a href="./product.html?id==$(product._id">
+  (`<a href="./product.html?id=${product._id}">
   <article> <img src="${product.imageUrl}" alt="$product.name">
   <h3 class='productName'>${product.name}</h3>
   <p class="productDescription">${product.description}</p>
 </article></a>`);
- }
 }
-if(sessionStorage.getItem("data") !== null){
-const dataSession = JSON.parse(sessionSorage.getItem("data"));
+}
+/*titre= document.createElement("h3");
+titre.textContent = product.name;
+article.appendChild (titre);
+
+text = document.createElement("p");
+text.productDescription = product.decsription;
+
+image = document.createElement("img");
+image.src =product.imageUrl;
+article = document.createElement("article");
+article.appendChild(image);
+article.appendChild(titre);
+
+items.appendChild(article);
+ 
+/*if(sessionStorage.getItem("data") !== null){
+const dataSession = JSON.parse(sessionStorage.getItem("data"));
 console.log(dataSession)
 displayItems(dataSession)
 }
 else{
  getData();
-}
- /*function addProducts(data){
-  //_id récupéré dépuis console
- const id = data[0]._id
- console.log(id)
- const anchor = makeAnchor(id)
- appendChildren (anchor)
- }
+}*/
 
- function makeAnchor(id){
+ 
+
+ /*function makeAnchor(id){
 // création d'un element  
  const anchor = document.createElement("a")
  anchor.href = "./product.html?id=" + id
