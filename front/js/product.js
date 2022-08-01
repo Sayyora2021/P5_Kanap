@@ -1,23 +1,28 @@
-const queryString = window.location.search
+//recuperation et extraction de l'id
+const queryString = window.location.href
 const urlParams = new URLSearchParams (queryString)
 const id = urlParams.get("id")
+console.log(id)
 
 
 //pour recuperer le produit
-fetch(`http://localhost:3000/api/products/107fb5b75607497b96722bda5b504926`)
+fetch(`http://localhost:3000/api/products/${id}`)
 .then((response) =>response.json())
 .then((res) =>console.log(res))
 
 //recuperation des elements existants dans HTML
-const produitImage = document.querySelector(".item__img");
+/*const produitImage = document.querySelector(".item__img");
 console.log(produitImage)
 
-const image = document.createElement("img");
+
+
+/*let image = document.createElement("img");
 image.src = ("http://localhost:3000/images/kanap01.jpeg");
 document.querySelector(".item__img").appendChild(image)
 
-const produitContent = document.querySelector(".item__content");
+/*const produitContent = document.querySelector(".item__content");
 console.log(produitContent)
+
 
 /*const produitPrice = document.querySelector(".item__content__titlePrice");
 document.querySelector("item__content").appendChild("item__content__titlePrice")
@@ -27,9 +32,7 @@ console.log(produitPrice)
   const {altTxt, colors, description, imageUrl, name, price, _id} = canap1
 }
 
-/*article = document.createElement("article");
-article.appendChild(image);
-items.appendChild(article);
+
 
 //titre = document.createElement()
 
