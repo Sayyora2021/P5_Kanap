@@ -1,7 +1,7 @@
 //pour recuperer l'id existant
 const idProduct = new URL(document.location).searchParams.get('id');
 const itemImg = document.querySelector('.item__img');
-const kanapName = document.querySelector('#title');
+
 //const itemContent = document.querySelector('.item__content');
 
 //pour recuperer le produit
@@ -17,7 +17,7 @@ fetch(`http://localhost:3000/api/products/${idProduct}`)
     kanapName.textContent = (`${product.name}`);
 
     let kanapPrice = document.querySelector('#price');
-    kanapPrice.texteContent = (`${product.price}`);
+    kanapPrice.textContent = (`${product.price}`);
     
     let kanapDescription = document.querySelector('#description');
     kanapDescription.textContent = (`${product.description}`);
