@@ -22,8 +22,14 @@ fetch(`http://localhost:3000/api/products/${idProduct}`)
     let kanapDescription = document.querySelector('#description');
     kanapDescription.textContent = (`${product.description}`);
 
-    
-
+    let select = document.querySelector('#colors')
+    if (select !=null){
+    }
+    for (let i=0; i< color.length; i+=1){
+      console.log (color[i]);
+    }
+    color = ['Blue, White,Black']
+color.textContent = (`${product.colors}`);
  })
 
  
