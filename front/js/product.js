@@ -1,27 +1,37 @@
-//recuperation et extraction de l'id
-const queryString = window.location.href
-const urlParams = new URLSearchParams (queryString)
-const id = urlParams.get("id")
-console.log(id)
+/*then(function(value) {
+  // sessionStorage.setItem("data", JSON.stringify(value))
+   displayItems(value)
+   console.log(value)
+   })*/
+const idProduct = new URL(document.location).searchParams.get('id');
+const item_img = document.querySelector(".item_img");
 
 
 //pour recuperer le produit
-fetch(`http://localhost:3000/api/products/${id}`)
+fetch(`http://localhost:3000/api/products/${idProduct}`)
 .then((response) =>response.json())
-.then((res) =>console.log(res))
+.then((product) =>{
+const itemImg = document.querySelector(".item_img");
+ 
+
+const imageKanap = document.createElement("img");
+imageKanap.src = product.imageUrl;
+imageKanap.alt= product.altTxt;
+itemImg.appendChild(imageKanap);
+})
+
+//const displayProducts = (product)=> {
+  
+
+
+/*image = document.createElement("img");
+image.src =product.imageUrl;
+image.alt = product.altTxt;
 
 //recuperation des elements existants dans HTML
 /*const produitImage = document.querySelector(".item__img");
 console.log(produitImage)
 
-
-
-/*let image = document.createElement("img");
-image.src = ("http://localhost:3000/images/kanap01.jpeg");
-document.querySelector(".item__img").appendChild(image)
-
-/*const produitContent = document.querySelector(".item__content");
-console.log(produitContent)
 
 
 /*const produitPrice = document.querySelector(".item__content__titlePrice");
