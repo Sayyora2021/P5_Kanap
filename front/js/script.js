@@ -20,7 +20,7 @@ const displayItems = function (value){
 a.href = `./product.html?id=${product._id}`
 itemsTag.appendChild(a);
 console.log(a)
-
+//creation des elements existants
 article = document.createElement("article");
 items.appendChild(article);
 a.appendChild(article);
@@ -37,7 +37,7 @@ let p = document.createElement("p");
 p.className = "productDescription";
 p.textContent = product.description;
 
-
+//inserer tous dans l'article
 article.appendChild(image);
 article.appendChild(titre);
 article.appendChild(p);

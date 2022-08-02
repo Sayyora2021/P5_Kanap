@@ -22,14 +22,22 @@ fetch(`http://localhost:3000/api/products/${idProduct}`)
     let kanapDescription = document.querySelector('#description');
     kanapDescription.textContent = (`${product.description}`);
 
-    let select = document.querySelector('#colors')
-    if (select !=null){
-    }
-    for (let i=0; i< color.length; i+=1){
-      console.log (color[i]);
-    }
-    color = ['Blue, White,Black']
-color.textContent = (`${product.colors}`);
+const dropdownColors =product.colors
+console.log(dropdownColors);
+
+for (let color of dropdownColors){
+  const dropdown=document.createElement('option');
+  option = `${product.colors}`
+  dropdown.value = (`${color}`);
+  dropdown.textConent= (`${color}`);
+  
+}
+ /*for (let color of dropdownColors){
+  const dropdown = document.createElement('option');
+  dropdown.value = (`${color}`);
+  option.appendChild(dropdown)
+ }   */
+    
  })
 
  
