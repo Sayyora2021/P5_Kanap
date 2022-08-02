@@ -26,20 +26,18 @@ const dropdownColors =product.colors
 console.log(dropdownColors);
 
 for (let color of dropdownColors){
-  const dropdown=document.createElement('option');
-  option = `${product.colors}`
-  dropdown.value = (`${color}`);
-  dropdown.textConent= (`${color}`);
-  
+  let dropdown = document.createElement ('option');
+  dropdown.value = `${color}`;
+  dropdown.textContent= `${color}`;
+  let select = document.querySelector('#colors')
+  select.appendChild(dropdown)
+   
 }
- /*for (let color of dropdownColors){
-  const dropdown = document.createElement('option');
-  dropdown.value = (`${color}`);
-  option.appendChild(dropdown)
- }   */
+ 
     
  })
 
- 
+ //creation des option et option value existants dans html  
+    //
 
 
