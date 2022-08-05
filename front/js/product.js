@@ -38,7 +38,7 @@ fetch(`http://localhost:3000/api/products/${idProduct}`)
 //creation de bouton
 const button =document.querySelector('#addToCart')
 
-  button.addEventListener("click", (e)=>{
+button.addEventListener("click", (e)=>{
    
  console.log("click sur le") ;
  const color = document.querySelector('#colors');
@@ -55,6 +55,10 @@ const button =document.querySelector('#addToCart')
   color: couleur,
   quantity:kanapQuantity,
  }
+ 
+ let myArray = [kanape]
+ console.log(myArray);
+ //myArray.push()
  console.log(kanape);
  localStorage.setItem("kanape", JSON.stringify(kanape));
 })
