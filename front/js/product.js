@@ -22,22 +22,47 @@ fetch(`http://localhost:3000/api/products/${idProduct}`)
     let kanapDescription = document.querySelector('#description');
     kanapDescription.textContent = (`${product.description}`);
 
-const dropdownColors =product.colors
-console.log(dropdownColors);
+//creation de boucles des options et value existants dans html pour couleur 
+    const dropdownColors =product.colors
+    console.log(dropdownColors);
 
-for (let color of dropdownColors){
-  let dropdown = document.createElement ('option');
-  dropdown.value = `${color}`;
-  dropdown.textContent= `${color}`;
-  let select = document.querySelector('#colors')
-  select.appendChild(dropdown)
-   
-}
- 
-    
+    for (let color of dropdownColors){
+     let dropdown = document.createElement ('option');
+     dropdown.value = `${color}`;
+     dropdown.textContent= `${color}`;
+     let select = document.querySelector('#colors')
+     select.appendChild(dropdown)
+ }
  })
+ 
+//creation de bouton
+const button =document.querySelector('#addToCart')
 
- //creation des option et option value existants dans html  
-    //
+  button.addEventListener("click", (e)=>{
+   
+ console.log("click sur le") ;
+ const color = document.querySelector('#colors');
+ let couleur = color.value;
+ console.log(couleur);
+
+ const quantity = document.querySelector('#quantity');
+ let kanapQuantity = quantity.value;
+ console.log(kanapQuantity);
+ console.log(idProduct);
+
+ let kanape = {
+  id: idProduct,
+  color: couleur,
+  quantity:kanapQuantity,
+ }
+ console.log(kanape);
+ localStorage.setItem("kanape", JSON.stringify(kanape));
+})
+
+
+
+//    window.location.href ="cart.html"*/
+
+
 
 
