@@ -56,16 +56,41 @@ button.addEventListener("click", (e)=>{
   quantity:kanapQuantity,
  }
  
- let myArray = [kanape]
- console.log(myArray);
+ //creation de panier
+ let myBasket = 
+ //fonction pour envoyer a confirmation
+ /*const confirmation =() =>{
+  if (window.confirm(`${idProduct.kanape} a bien été ajouté au panier
+  consulter le panier OK ou revenir à l'accueil ANNULER`)){
+  window.location.href = "carte.html";
+  }else{
+    window.location.href = "index.html";
+  }
+ }*/
+
  //myArray.push()
+ let myArray = ['kanape'];
+ console.log(myArray);
+ myArray.push("");
+ 
  console.log(kanape);
  localStorage.setItem("kanape", JSON.stringify(kanape));
+
+ //s'il y a deja un produit d'enregistre dans local storage
+if(kanape){
+
+}
+//s'il n'y a pas de produit d'enregistre dans local storage
+else{
+  kanape = []
+  console.log(myArray)
+  kanape.push(myArray)
+  localeStorage.setItem("kanape", JSON.stringify(myArray))
+}
+
 })
 
 
-
-//    window.location.href ="cart.html"*/
 
 
 
