@@ -55,9 +55,30 @@ button.addEventListener("click", (e)=>{
   color: couleur,
   quantity:kanapQuantity,
  }
- 
- //creation de panier
- let myBasket = 
+  
+ //myArray.push()
+  let myArray = [];
+  myArray.push(kanape);
+  //button.push(myArray)
+    
+  localStorage.setItem("kanape", JSON.stringify(kanape));
+
+ //s'il y a deja un produit d'enregistre dans local storage
+/*if(kanape){
+}
+//s'il n'y a pas de produit d'enregistre dans local storage
+else{
+  kanape = []
+  console.log(myArray)
+  kanape.push(myArray)
+  localeStorage.setItem("kanape", JSON.stringify(myArray))
+}*/
+
+})
+
+
+//creation de panier
+ //let myBasket = 
  //fonction pour envoyer a confirmation
  /*const confirmation =() =>{
   if (window.confirm(`${idProduct.kanape} a bien été ajouté au panier
@@ -67,31 +88,6 @@ button.addEventListener("click", (e)=>{
     window.location.href = "index.html";
   }
  }*/
-
- //myArray.push()
- let myArray = ['kanape'];
- console.log(myArray);
- myArray.push("");
- 
- console.log(kanape);
- localStorage.setItem("kanape", JSON.stringify(kanape));
-
- //s'il y a deja un produit d'enregistre dans local storage
-if(kanape){
-
-}
-//s'il n'y a pas de produit d'enregistre dans local storage
-else{
-  kanape = []
-  console.log(myArray)
-  kanape.push(myArray)
-  localeStorage.setItem("kanape", JSON.stringify(myArray))
-}
-
-})
-
-
-
 
 
 
