@@ -35,6 +35,9 @@ fetch(`http://localhost:3000/api/products/${idProduct}`)
  }
  })
  
+ // Initialisation du panier
+ let myArray = [];
+
 //creation de bouton
 const button =document.querySelector('#addToCart')
 
@@ -55,10 +58,13 @@ button.addEventListener("click", (e)=>{
   color: couleur,
   quantity:kanapQuantity,
  }
+
+ console.log( kanape)
   
  //myArray.push()
-  let myArray = [];
+  
   myArray.push(kanape);
+  console.log(myArray);
   //button.push(myArray)
     
   localStorage.setItem("kanape", JSON.stringify(kanape));
