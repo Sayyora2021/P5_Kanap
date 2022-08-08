@@ -68,18 +68,20 @@ button.addEventListener("click", (e)=>{
  //put the object into storage 
  localStorage.setItem("kanape", JSON.stringify(kanape));
  
- //retrieve the object from storage
-let saveBasket = localStorage.getItem("kanape"); 
-console.log('saveBasket:', JSON.parse(saveBasket));
-})
-
-/*
-//function to save in basket
-function saveBasket (){
-if (saveBasket == null){
-  return[];
+ //condition for the color & number
+const userQuantity = kanapQuantity;
+if(userQuantity == null){
+ userQuantity= []
+  console.log(userQuantity);
+}else{
+  console.log("choisir un produit");
+};
+const userColor = couleur;
+if(userColor == null){
+  userColor =[]
+  console.log(userColor);
 } else{
-  return (saveBasket);
+  console.log("choisir une couleur");
 }
-*/
+})
 
