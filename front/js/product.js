@@ -62,38 +62,24 @@ button.addEventListener("click", (e)=>{
  console.log( kanape)
   
  //myArray.push()
-  
   myArray.push(kanape);
   console.log(myArray);
-  //button.push(myArray)
-    
-  localStorage.setItem("kanape", JSON.stringify(kanape));
-
- //s'il y a deja un produit d'enregistre dans local storage
-/*if(kanape){
-}
-//s'il n'y a pas de produit d'enregistre dans local storage
-else{
-  kanape = []
-  console.log(myArray)
-  kanape.push(myArray)
-  localeStorage.setItem("kanape", JSON.stringify(myArray))
-}*/
-
+ 
+ //put the object into storage 
+ localStorage.setItem("kanape", JSON.stringify(kanape));
+ 
+ //retrieve the object from storage
+let saveBasket = localStorage.getItem("kanape"); 
+console.log('saveBasket:', JSON.parse(saveBasket));
 })
 
-
-//creation de panier
- //let myBasket = 
- //fonction pour envoyer a confirmation
- /*const confirmation =() =>{
-  if (window.confirm(`${idProduct.kanape} a bien été ajouté au panier
-  consulter le panier OK ou revenir à l'accueil ANNULER`)){
-  window.location.href = "carte.html";
-  }else{
-    window.location.href = "index.html";
-  }
- }*/
-
-
+/*
+//function to save in basket
+function saveBasket (){
+if (saveBasket == null){
+  return[];
+} else{
+  return (saveBasket);
+}
+*/
 
