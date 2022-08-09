@@ -33,7 +33,7 @@ fetch(`http://localhost:3000/api/products/${idProduct}`)
      let select = document.querySelector('#colors')
      select.appendChild(dropdown)
  }
- })
+
  
  // Initialisation du panier
  let myBasket = [];
@@ -57,7 +57,7 @@ button.addEventListener("click", (e)=>{
  let kanape = {
   id: idProduct,
   color: couleur,
-  quantity:kanapQuantity,
+  quantity:Number (kanapQuantity),
  }
 
  console.log(kanape);
@@ -69,18 +69,13 @@ button.addEventListener("click", (e)=>{
   
  //put the object into storage 
  localStorage.setItem("myBasket", JSON.stringify(myBasket));
+ if (myBasket == quantity.value){
+ return myBasket;
+ } else {
+  console.log ('Veuillez choisir le nombre')
+ }
+ 
 
- if (myBasket >= myBasket.quantity) {
-  return[myBasket];
-} else if (myBasket.quantity!= myBasket) {
-  console.log('Merci de choisir une quantité correspondant');
-}else{
-  //revenir sur a page d'accueil
-}
-// Si le canape existe
-// Sinon si je n'ajoute pas l'article/Si le produit et idendite, j'incremente la quantite
-// si l'article n'existe j'ajoute au tableau
-
-
+});
 })
 
