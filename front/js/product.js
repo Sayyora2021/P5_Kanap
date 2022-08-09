@@ -36,10 +36,11 @@ fetch(`http://localhost:3000/api/products/${idProduct}`)
  })
  
  // Initialisation du panier
- let myArray = [];
+ let myBasket = [];
 
 //creation de bouton
 const button =document.querySelector('#addToCart')
+
 
 button.addEventListener("click", (e)=>{
    
@@ -59,29 +60,27 @@ button.addEventListener("click", (e)=>{
   quantity:kanapQuantity,
  }
 
- console.log( kanape)
+ console.log(kanape);
   
  //myArray.push()
-  myArray.push(kanape);
-  console.log(myArray);
- 
+  myBasket.push(kanape);
+  console.log(myBasket);
+
+  
  //put the object into storage 
- localStorage.setItem("kanape", JSON.stringify(kanape));
- 
- //condition for the color & number
-const userQuantity = kanapQuantity;
-if(userQuantity == null){
- userQuantity= []
-  console.log(userQuantity);
+ localStorage.setItem("myBasket", JSON.stringify(myBasket));
+
+ if (myBasket >= myBasket.quantity) {
+  return[myBasket];
+} else if (myBasket.quantity!= myBasket) {
+  console.log('Merci de choisir une quantité correspondant');
 }else{
-  console.log("choisir un produit");
-};
-const userColor = couleur;
-if(userColor == null){
-  userColor =[]
-  console.log(userColor);
-} else{
-  console.log("choisir une couleur");
+  //revenir sur a page d'accueil
 }
+// Si le canape existe
+// Sinon si je n'ajoute pas l'article/Si le produit et idendite, j'incremente la quantite
+// si l'article n'existe j'ajoute au tableau
+
+
 })
 
