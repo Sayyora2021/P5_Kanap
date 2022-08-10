@@ -33,7 +33,7 @@ fetch(`http://localhost:3000/api/products/${idProduct}`)
      let select = document.querySelector('#colors')
      select.appendChild(dropdown)
  }
-
+});
  
  // Initialisation du panier
  let myBasket = [];
@@ -69,13 +69,23 @@ button.addEventListener("click", (e)=>{
   
  //put the object into storage 
  localStorage.setItem("myBasket", JSON.stringify(myBasket));
- if (myBasket == quantity.value){
- return myBasket;
+
+ let addBasket =JSON.parse( localStorage.getItem("myBasket"))
+
+ if(addBasket.some(item => (item.id == kanape.id) && (item.color == kanape.color))){
+   kanape.quantity; //+=1
+   console.log("merci pour l'achat");
+} else {
+   alert('Merci de choisir le nombre');
+}
+ /*if (addBasket == kanape.length){
+ localStorage.getItem("addBasket",JSON.parse);
+ console.log("merci pour l'achat");
  } else {
   console.log ('Veuillez choisir le nombre')
- }
+ }*/
  
 
-});
+
 })
 
