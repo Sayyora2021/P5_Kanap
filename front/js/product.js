@@ -39,12 +39,12 @@ fetch(`http://localhost:3000/api/products/${idProduct}`)
  let basket = [];
 
 //creation de bouton
-const button =document.querySelector('#addToCart')
+const button =document.getElementById('addToCart')
 
+//const kanape = JSON.stringify(localStorage.getItem("kanape"));
 
 button.addEventListener("click", (e)=>{
   
- let basket = JSON.parse(localStorage.getItem("basket"));
  console.log("click sur le") ;
 
  const color = document.getElementById('colors');
@@ -64,14 +64,15 @@ button.addEventListener("click", (e)=>{
 
  console.log(kanape);
  
-//function qui ne marche pas
- if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100 && couleur!== ""){
+//condition qui ne marche pas
+/* if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100 && couleur!== ""){
+  localStorage.getItem("basket")
   console.log("quantity ok");
    }if(localStorage.getItem("basket")===null){
     basket =[]
     basket.push(kanape);
    console.log('merci de choisir');
-   localStorage.setItem("basket", JSON.stringify(basket));
+   localStorage.setItem("basket", JSON.stringify(basket).value);
    //window.location.href = "carte.html";
    } else {
     let itemProduct = false;
@@ -82,33 +83,38 @@ button.addEventListener("click", (e)=>{
         break; // sortie de boucle pour eviter de repeter la fonction
       }
     }
-   }
-   // fonction qui marche
- /*if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100 && couleur!== ""){
-  console.log("quantity ok");
- }else{
-  let itemProduct = false;
-  console.log ('Merci de choisir un nombre et couleur de canapé');
- };
-/*
- if(addBasket.some(item => (item.id == kanape.id) && (item.color == kanape.color))){
-   kanape.quantity +=1;
-   console.log("merci pour l'achat");
-} else {
-   alert('Merci de choisir le nombre');
-}
-//myArray.push()
-myBasket.push(kanape);
-console.log(myBasket); 
+   }*/
+   // condition qui marche quantity
+ if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100){ // si la quantité est entre 1 et 100
+    alert("quantity ok");
+ }if (kanape.color != ""){ //si la couleur est choisie
+      alert('couleur ok');
+ }else{basket = JSON.parse(localStorage.getItem("basket")); //on montre le pnaier
+     
+ }if (basket == null){ //si il n'y a rien dans le panier
+        basket = [];
+        basket.push(kanape);
+        localStorage.setItem("basket", JSON.stringify(basket)); //on montre le tableau
+      }else{
+        basket.push(kanape);
+        localStorage.setItem("basket", JSON.stringify(basket));
+      } for(let [i] in basket)
+          if (basket [i].id == kanape.id && basket[i].color == kanape.color){
 
- /*
- //ex:how retrieve elements of object localStorage
- for( let i = 0; i < localStorage.length; i++){
-  localStorage.key(i);
+          }else {
+            basket [i].quantity;
+          }
 
-//to delete an element
-localStorage.removeItem('object');*/
+  
+              
+           
+      
+
+    });
+       
 
 
-});
+
+
+
 
