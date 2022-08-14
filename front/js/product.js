@@ -84,7 +84,7 @@ button.addEventListener("click", (e)=>{
       }
     }
    }*/
-   // condition qui marche quantity
+   // condition qui marche 
  if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100){ // si la quantité est entre 1 et 100
     alert("quantity ok");
  }if (kanape.color != ""){ //si la couleur est choisie
