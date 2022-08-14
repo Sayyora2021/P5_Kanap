@@ -99,8 +99,8 @@ button.addEventListener("click", (e)=>{
         myBasket.push(kanape);
         localStorage.setItem("basket", JSON.stringify(myBasket));
       } for(const item of myBasket){
-          if (item.id === kanape.id && item.color === kanape.color)
-          kanape.quantity+=1
+          if (item.id === kanape.id && item.color === kanape.color)// si même id et même couleur
+          kanape.quantity+=1                 // montrer la quantité
          } 
                
            
