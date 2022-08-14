@@ -1,3 +1,6 @@
+function addBasket (basket){
+  localStorage.setItem("basket", JSON.stringify("basket"));
+}
 /*function saveBasket(basket){
  localStorage.setItem("basket", JSON.stringify(basket));
 }
