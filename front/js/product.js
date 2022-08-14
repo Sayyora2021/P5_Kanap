@@ -36,7 +36,7 @@ fetch(`http://localhost:3000/api/products/${idProduct}`)
 });
  
  // Initialisation du panier
- let basket = [];
+ let myBasket = [];
 
 //creation de bouton
 const button =document.getElementById('addToCart')
@@ -89,24 +89,20 @@ button.addEventListener("click", (e)=>{
     alert("quantity ok");
  }if (kanape.color != ""){ //si la couleur est choisie
       alert('couleur ok');
- }else{basket = JSON.parse(localStorage.getItem("basket")); //on montre le pnaier
-     
- }if (basket == null){ //si il n'y a rien dans le panier
-        basket = [];
-        basket.push(kanape);
-        localStorage.setItem("basket", JSON.stringify(basket)); //on montre le tableau
-      }else{
-        basket.push(kanape);
-        localStorage.setItem("basket", JSON.stringify(basket));
-      } for(let [i] in basket)
-          if (basket [i].id == kanape.id && basket[i].color == kanape.color){
-
-          }else {
-            basket [i].quantity;
-          }
-
+ }if (myBasket = JSON.parse(localStorage.getItem("basket"))){//on montre le pnaier
   
-              
+ }if (myBasket == null){ //si il n'y a rien dans le panier
+        myBasket = [];
+        myBasket.push(kanape);
+        localStorage.setItem("basket", JSON.stringify(myBasket)); //on montre le tableau
+      }else{
+        myBasket.push(kanape);
+        localStorage.setItem("basket", JSON.stringify(myBasket));
+      } for(const item of myBasket){
+          if (item.id === kanape.id && item.color === kanape.color)
+          kanape.quantity+=1
+         } 
+               
            
       
 
