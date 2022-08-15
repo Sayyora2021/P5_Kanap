@@ -43,6 +43,7 @@ const button =document.getElementById('addToCart')
 
 //const kanape = JSON.stringify(localStorage.getItem("kanape"));
 
+//creation de fonction button
 button.addEventListener("click", (e)=>{
   
  console.log("click sur le") ;
@@ -64,15 +65,13 @@ button.addEventListener("click", (e)=>{
 
  console.log(kanape);
  
-   // condition qui marche 
-  if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100){ // si la quantité est entre 1 et 100
+   // condition qui récupère les elemnts de l'objet
+  /*if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100){ // si la quantité est entre 1 et 100
     alert("quantity ok");
   
    if (kanape.color != ""){ //si la couleur est choisie
       alert('couleur ok');
- 
- 
-  myBasket = JSON.parse(localStorage.getItem("myBasket"))//on recupère le panier
+   myBasket = JSON.parse(localStorage.getItem("myBasket"))//on recupère le panier
     
  if (myBasket == null){ //si le panier n'existe pas
         myBasket = []; // creation de panier
@@ -86,8 +85,9 @@ button.addEventListener("click", (e)=>{
     }
       else{
         console.log('merci de choisir une quantité')
-      }
-     /* 
+      }*/
+
+    //ma condition test 
      if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100){ // si la quantité est entre 1 et 100
        alert("quantity ok");
         }else{
@@ -104,17 +104,12 @@ button.addEventListener("click", (e)=>{
         myBasket.push(kanape); // on ajout objet dans le panier
         localStorage.setItem("basket", JSON.stringify(myBasket)); //on met le panier dans storage
       } else{
-        const itemOfBasket = myBasket;
-       for (let i =0; i< itemOfBasket.length; i++){   //le panier est inférieur de myBasket, on incremente le produit
-        console.log('canapé rajouté dans le panier')
+        myBasket.push(kanape); //ajoute du canape au panier
+        localStorage.setItem("basket", JSON.stringify(myBasket)); //on met le panier dans storage
+        console.log('canapé est rajouté dans le panier');
        }   
-     }
-     */
-    /* 
-     for(const item of myBasket){
-          if (item.id === kanape.id && item.color === kanape.color)// si même id et même couleur
-          kanape.quantity;                 // montrer la quantité
-         } */
+     
+     
       
       
 
