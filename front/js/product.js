@@ -64,26 +64,6 @@ button.addEventListener("click", (e)=>{
 
  console.log(kanape);
  
-//condition qui ne marche pas
-/* if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100 && couleur!== ""){
-  localStorage.getItem("basket")
-  console.log("quantity ok");
-   }if(localStorage.getItem("basket")===null){
-    basket =[]
-    basket.push(kanape);
-   console.log('merci de choisir');
-   localStorage.setItem("basket", JSON.stringify(basket).value);
-   //window.location.href = "carte.html";
-   } else {
-    let itemProduct = false;
-    for (let el in basket){
-      if(idProduct === basket[el].id && couleur === basket[el].couleur){
-        basket[el].quantity = Number(basket[el].quantity)+Number (kanapQuantity);
-        itemProduct = true;
-        break; // sortie de boucle pour eviter de repeter la fonction
-      }
-    }
-   }*/
    // condition qui marche 
   if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100){ // si la quantité est entre 1 et 100
     alert("quantity ok");
