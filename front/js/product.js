@@ -7,7 +7,11 @@ const itemImg = document.querySelector('.item__img');
 //pour recuperer le produit
 fetch(`http://localhost:3000/api/products/${idProduct}`)
   .then((response) => response.json())
-  .then((product) =>{
+  .then((res) => display(res))
+    
+
+//fonction qui a img,title,price, description, loop-color
+  function display (product){
     const imageKanap = document.createElement('img');
     imageKanap.src = product.imageUrl;
     imageKanap.alt = product.altTxt;
@@ -33,7 +37,7 @@ fetch(`http://localhost:3000/api/products/${idProduct}`)
      let select = document.getElementById('colors')
      select.appendChild(dropdown);
  }
-});
+};
  
  // Initialisation du panier
  let myBasket = [];
@@ -44,7 +48,9 @@ const button =document.getElementById('addToCart')
 //const kanape = JSON.stringify(localStorage.getItem("kanape"));
 
 //creation de fonction button
-button.addEventListener("click", (e)=>{
+button.addEventListener("click", buttonClick)
+
+function buttonClick(){
   
  console.log("click sur le") ;
 
@@ -62,11 +68,12 @@ button.addEventListener("click", (e)=>{
   color: couleur,
   quantity:Number (kanapQuantity),
  }
-
+ /*localStorage.setItem("kanape", JSON.stringify("myBasket"));*/
+  window.location.href = "cart.html"
  console.log(kanape);
  
-       //condition qui affishe les objets sélectionnés 
-     if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100){ // si la quantité est entre 1 et 100
+ //condition qui affishe les objets sélectionnés 
+  if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100){ // si la quantité est entre 1 et 100
        alert("quantity ok");
         }else{
         console.log('merci de choisir une quantité')
@@ -87,13 +94,11 @@ button.addEventListener("click", (e)=>{
         myBasket.push(kanape); //ajoute du canape au panier
         localStorage.setItem("kanape", JSON.stringify(myBasket)); //on met le panier dans storage
         console.log('canapé est rajouté dans le panier');
-       }   
+       }  
      
-     
-      
-      
+       
 
-    });
+    };
        
 
 

@@ -1,9 +1,10 @@
 //afficher les produits depuis localStorage
-let addBasket = JSON.parse(localStorage.getItem("kanape"));
-console.log(addBasket);
+let numberOfItem = localStorage.length
+//JSON.parse(localStorage.getItem("kanape"));
+console.log('numberOfItem');
 
 //recuperer les elements by id
-const theProducts = document.getElementById('cart__items');
+/*const theProducts = document.getElementById('cart__items');
 console.log('theProducts');
 /*function saveBasket(basket){
  localStorage.setItem("basket", JSON.stringify(basket));
