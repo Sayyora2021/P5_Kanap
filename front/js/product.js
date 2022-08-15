@@ -89,7 +89,7 @@ button.addEventListener("click", (e)=>{
     alert("quantity ok");
     
  } else{
-  alert ("merci de choisir une quantité");
+  console.log('merci de choisir une quantité');
  }
  if (kanape.color != ""){ //si la couleur est choisie
       alert('couleur ok');
