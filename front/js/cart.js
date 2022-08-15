@@ -1,5 +1,5 @@
 //afficher les produits depuis localStorage
-let addBasket = JSON.parse(localStorage.getItem("myBasket"));
+let addBasket = JSON.parse(localStorage.getItem("kanape"));
 console.log(addBasket);
 
 //recuperer les elements by id
