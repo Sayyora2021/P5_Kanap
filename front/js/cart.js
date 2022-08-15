@@ -1,6 +1,10 @@
-function addBasket (basket){
-  localStorage.setItem("basket", JSON.stringify("basket"));
-}
+//afficher les produits depuis localStorage
+let addBasket = JSON.parse(localStorage.getItem("myBasket"));
+console.log(addBasket);
+
+//recuperer les elements by id
+const theProducts = document.getElementById('cart__items');
+console.log('theProducts');
 /*function saveBasket(basket){
  localStorage.setItem("basket", JSON.stringify(basket));
 }

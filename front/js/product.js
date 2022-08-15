@@ -85,19 +85,19 @@ button.addEventListener("click", (e)=>{
     }
    }*/
    // condition qui marche 
- if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100){ // si la quantité est entre 1 et 100
+  if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100){ // si la quantité est entre 1 et 100
     alert("quantity ok");
   
    if (kanape.color != ""){ //si la couleur est choisie
       alert('couleur ok');
  
  
-  myBasket = JSON.parse(localStorage.getItem("basket"))//on recupère le panier
+  myBasket = JSON.parse(localStorage.getItem("myBasket"))//on recupère le panier
     
- if (myBasket == null){ //si le pnaier n'existe pas
+ if (myBasket == null){ //si le panier n'existe pas
         myBasket = []; // creation de panier
         myBasket.push(kanape); // on ajout objet dans le panier
-        localStorage.setItem("basket", JSON.stringify(myBasket)); //on met le panier dans storage
+        localStorage.setItem("myBasket", JSON.stringify(myBasket)); //on met le panier dans storage
       }
     }
       else{                              // sinon on montre ce qu'il y a dans le panier
@@ -107,17 +107,37 @@ button.addEventListener("click", (e)=>{
       else{
         console.log('merci de choisir une quantité')
       }
-     /* for(const item of myBasket){
+     /* 
+     if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100){ // si la quantité est entre 1 et 100
+       alert("quantity ok");
+        }else{
+        console.log('merci de choisir une quantité')
+      };
+      if (kanape.color != ""){ //si la couleur est choisie
+        alert('couleur ok');
+        myBasket = JSON.parse(localStorage.getItem("basket"))//on recupère le panier
+      } else{                              // sinon on montre ce qu'il y a dans le panier
+        alert ("merci de choisir une couleur");
+      } 
+      if (myBasket == null){ //si le panier n'existe pas
+        myBasket = []; // creation de panier
+        myBasket.push(kanape); // on ajout objet dans le panier
+        localStorage.setItem("basket", JSON.stringify(myBasket)); //on met le panier dans storage
+      } else{
+        const itemOfBasket = myBasket;
+       for (let i =0; i< itemOfBasket.length; i++){   //le panier est inférieur de myBasket, on incremente le produit
+        console.log('canapé rajouté dans le panier')
+       }   
+     }
+     */
+    /* 
+     for(const item of myBasket){
           if (item.id === kanape.id && item.color === kanape.color)// si même id et même couleur
           kanape.quantity;                 // montrer la quantité
          } */
-      /*         
-       const itemOfBasket = myBasket;
-       for (let i =0; i< itemOfBasket; i++{
-        console.log('le canape est rajouté dans le panier)
-       })    
       
-*/
+      
+
     });
        
 
