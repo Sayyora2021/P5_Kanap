@@ -87,33 +87,37 @@ button.addEventListener("click", (e)=>{
    // condition qui marche 
  if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100){ // si la quantité est entre 1 et 100
     alert("quantity ok");
-    
- } else{
-  console.log('merci de choisir une quantité');
- }
- if (kanape.color != ""){ //si la couleur est choisie
-      alert('couleur ok');
- } else {
-  alert("merci de choisir une couleur");
-  myBasket = JSON.parse(localStorage.getItem("basket"))//on montre le pnaier
   
- } if (myBasket == null){ //si il n'y a rien dans le panier
-        myBasket = [];
-        myBasket.push(kanape);
+   if (kanape.color != ""){ //si la couleur est choisie
+      alert('couleur ok');
+ 
+ 
+  myBasket = JSON.parse(localStorage.getItem("basket"))//on recupère le panier
+    
+ if (myBasket == null){ //si le pnaier n'existe pas
+        myBasket = []; // creation de panier
+        myBasket.push(kanape); // on ajout objet dans le panier
         localStorage.setItem("basket", JSON.stringify(myBasket)); //on met le panier dans storage
       }
+    }
       else{                              // sinon on montre ce qu'il y a dans le panier
-        myBasket.push(kanape);
-        localStorage.setItem("basket", JSON.stringify(myBasket));
+        alert ("merci de choisir une couleur");
       } 
+    }
+      else{
+        console.log('merci de choisir une quantité')
+      }
      /* for(const item of myBasket){
           if (item.id === kanape.id && item.color === kanape.color)// si même id et même couleur
           kanape.quantity;                 // montrer la quantité
          } */
-               
-           
+      /*         
+       const itemOfBasket = myBasket;
+       for (let i =0; i< itemOfBasket; i++{
+        console.log('le canape est rajouté dans le panier)
+       })    
       
-
+*/
     });
        
 
