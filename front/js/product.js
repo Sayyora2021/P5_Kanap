@@ -95,17 +95,17 @@ button.addEventListener("click", (e)=>{
       };
       if (kanape.color != ""){ //si la couleur est choisie
         alert('couleur ok');
-        myBasket = JSON.parse(localStorage.getItem("basket"))//on recupère le panier
+        myBasket = JSON.parse(localStorage.getItem("kanape"))//on recupère le panier
       } else{                              // sinon on montre ce qu'il y a dans le panier
         alert ("merci de choisir une couleur");
       } 
       if (myBasket == null){ //si le panier n'existe pas
         myBasket = []; // creation de panier
         myBasket.push(kanape); // on ajout objet dans le panier
-        localStorage.setItem("basket", JSON.stringify(myBasket)); //on met le panier dans storage
+        localStorage.setItem("kanape", JSON.stringify(myBasket)); //on met le panier dans storage
       } else{
         myBasket.push(kanape); //ajoute du canape au panier
-        localStorage.setItem("basket", JSON.stringify(myBasket)); //on met le panier dans storage
+        localStorage.setItem("kanape", JSON.stringify(myBasket)); //on met le panier dans storage
         console.log('canapé est rajouté dans le panier');
        }   
      
