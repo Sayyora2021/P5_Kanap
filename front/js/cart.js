@@ -1,9 +1,24 @@
 //afficher le produit sélectionné depuis localStorage
-let giveFromStorage = JSON.parse(localStorage.getItem("basket"))
+const giveFromStorage = JSON.parse(localStorage.getItem("myBasket"));
+console.table(giveFromStorage);
 
 
-const displayArticle = document.getElementById('cart__items')
-console.log("cart_items est là")
+/*let addBasket=[];
+for (let i=0; i<addBasket.length; i++){
+  console.log('montrer le canapé');
+}
+
+/*for (let i =0; i<myBasket.length; i++){
+  console.log(myBasket)
+}
+
+let myBasket = ["kanape"];
+for (let i =0; i<myBasket.length; i++){
+  console.log(myBasket)
+}
+
+//const displayArticle = document.getElementById('cart__items')
+//console.log("cart_items est là")
 
 
 
