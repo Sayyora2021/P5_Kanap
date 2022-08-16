@@ -2,8 +2,15 @@
 const giveFromStorage = JSON.parse(localStorage.getItem("myBasket"));
 console.table(giveFromStorage);
 
+
+addBasket (myBasket);
+
+function addBasket (){
 for (let i=0; i< giveFromStorage.length; i++){
-  console.log('montrez les canapés');
+  myBasket.push(giveFromStorage);
+  
+  console.log('c\'est ok')
+}
 }
 /*let displayArticle = document.getElementById('cart__items')
  displayArticle.textContent = (`${displayArticle.cart__items}`) 
