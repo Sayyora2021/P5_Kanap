@@ -3,19 +3,20 @@ const giveFromStorage = JSON.parse(localStorage.getItem("myBasket"));
 console.table(giveFromStorage);
 
 
-let addBasket=[];
-/*for (let i=0; i<addBasket.length; i++){
+let displayArticle = document.getElementById('cart__items')
+ displayArticle.textContent = (`${displayArticle.cart__items}`) 
+console.log("cart_items est là")
+
+/*let addBasket=[];
+for (let i=0; i<addBasket.length; i++){
   console.log('montrer le canapé');
-}
+}*/
 
 /*for (let i =0; i<myBasket.length; i++){
   console.log(myBasket)
 }
 
-let myBasket = ["kanape"];
-for (let i =0; i<myBasket.length; i++){
-  console.log(myBasket)
-}
+
 
 //const displayArticle = document.getElementById('cart__items')
 //console.log("cart_items est là")
@@ -24,9 +25,6 @@ for (let i =0; i<myBasket.length; i++){
 
 
 /*
- let displayArticle = document.getElementById('cart__items')
-  displayArticle.textContent = (`${displayArticle.cart__items}`) 
-console.log("cart_items est là")
 
 
 //recuperer les elements by id
