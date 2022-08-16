@@ -1,104 +1,72 @@
-//afficher le produit sélectionné depuis localStorage
+const panier =[]
+
+
+giveBasket()
+console.log(panier)
+panier.forEach((item) => displayItems (item))
+
+function giveBasket (){
+  const numberOfItems = localStorage.length
+for(let i=0; i< numberOfItems; i++){
+  console.log(i)
+  const item = localStorage.getItem(localStorage.key(i))
+  console.log("objest est dans la position",i, "et", item)
+  const itemObject = JSON.parse(item);
+  panier.push(itemObject)
+}
+
+}
+
+function displayItems (item){
+  const article = makeArticle(item)
+  displayArticle (article)
+  console.log(article)
+  const image = makeImage(item)
+
+}
+
+function displayArticle(article){
+  document.querySelector("#cart__item").appendChild
+  (article)
+}
+ function makeArticle (item){
+  const article = document.createElement("article")
+  article.classList.add("cart__item")
+  article.dataset.id = item.id
+  article.dataset.color = item.color
+  return article
+ }
+
+
+function makeImage(item){
+  const div = document.createElement("div")
+  div.classList.add("cart__item__img")
+  const image = document.createElement("img")
+  image.src = item.imageUrl
+  image.alt = item.altTxt;
+  div.appendChild(image)
+  return image
+}
+
+/*
+//afficher le produit sélectionné depuis localStorage(il fonctionne pour tableau)
 const giveFromStorage = JSON.parse(localStorage.getItem("myBasket"));
 console.table(giveFromStorage);
 
-
-addBasket (myBasket);
-
-function addBasket (){
-for (let i=0; i< giveFromStorage.length; i++){
-  myBasket.push(giveFromStorage);
-  
-  console.log('c\'est ok')
-}
-}
-/*let displayArticle = document.getElementById('cart__items')
- displayArticle.textContent = (`${displayArticle.cart__items}`) 
-console.log("cart_items est là")
-
-/*let addBasket=[];
-for (let i=0; i<addBasket.length; i++){
-  console.log('montrer le canapé');
-}*/
-
-/*for (let i =0; i<myBasket.length; i++){
-  console.log(myBasket)
-}
+//let addBasket=[];
+/*for (let i=0; i< giveFromStorage; i++){
+  console.log(i)
+  const item = localStorage.getItem(localStorage.key(i))
 
 
 
 //const displayArticle = document.getElementById('cart__items')
 //console.log("cart_items est là")
+/*if(item.id === kanape.id && item.color === kanape.color)
+  kanape.id
 
 
 
+*/
 
-/*
 
-
-//recuperer les elements by id
-/*const theProducts = document.getElementById('cart__items');
-console.log('theProducts');
-/*function saveBasket(basket){
- localStorage.setItem("basket", JSON.stringify(basket));
-}
-function getBasket(){
-let basket = localStorage.querySelector("#cart__items");
-if(basket == null){
-return[];
-}else{
- return JSON.parse(basket);
-}
-}
-
-function addBasket(product){
- let basket = getBasket();
- let foundProduct = basket.find(p =>id == cart__items);
- if (foundProduct != undefined) {
-  foundProduct.quantity++;
- }else{
-  product.quantity = 1;
-  basket.push(product);
- 
- }
- saveBasket(basket);
-}
-//supprimer un produit
-function removeFromBasket(product){
- let basket = getBasket();
- basket = basket.filter(p => p.id  != product.id);
- saveBasket(basket);
-}
-
-//changer la quantite de produit
-function changeQuantity(product, quantity){
- let basket = getBasket();
- let foundProduct = basket.find(p => p.id  != product.id);
-if (foundProduct != undefined){
-foundProduct.quantity += quantity;
-if (foundProduct.quantity <= 0){
- removeFromBasket(foundProduct);
-}else{
- saveBasket(basket);
-}
-}
-
-}
-
-//calculer le nombre de produits
-function getNumberProduct(){
- let basket = getBasket();
- let number =0;
- for (let product of basket){
-  number+= product.quantity;
- }
- return number;
-}
-
-// calculer le prix
-function getTotalPrice(){
-let basket = getBasket();
-let total =0;
-for (let product of basket){
- total += product.quantity * product.price;
-}*/
