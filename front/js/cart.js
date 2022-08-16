@@ -2,8 +2,10 @@
 const giveFromStorage = JSON.parse(localStorage.getItem("myBasket"));
 console.table(giveFromStorage);
 
-
-let displayArticle = document.getElementById('cart__items')
+for (let i=0; i< giveFromStorage.length; i++){
+  console.log('montrez les canapés');
+}
+/*let displayArticle = document.getElementById('cart__items')
  displayArticle.textContent = (`${displayArticle.cart__items}`) 
 console.log("cart_items est là")
 
