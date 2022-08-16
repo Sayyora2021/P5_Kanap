@@ -73,28 +73,30 @@ function buttonClick(){
  console.log(kanape);
  
  //condition qui affishe les objets sélectionnés 
-  if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100){ // si la quantité est entre 1 et 100
-       alert("quantity ok");
-        }else{
-        console.log('merci de choisir une quantité')
-      };
+ if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100){ // si la quantité est entre 1 et 100
+	alert("quantity ok");
+	
+  if (kanape.color != ""){ //si la couleur est choisie
+		alert('couleur ok');
+		myBasket = JSON.parse(localStorage.getItem("basket"))//on récupère le panier
+		if (myBasket == null){ //si le panier n'existe pas
+			myBasket = []; // création du panier
+			myBasket.push(kanape); // ajout du canapé au panier
+			localStorage.setItem("basket", JSON.stringify(myBasket)); //on met le panier dans storage
+		
+    }	else {  // sinon 
+			myBasket.push(kanape); // ajout du canapé au panier
+			localStorage.setItem("basket", JSON.stringify(myBasket)); //on met le panier dans storage
+		
+    } 
+	} else {
+		alert("merci de choisir une couleur");
+	} 
+}else{
+	alert('merci de choisir une quantité');
+}
 
-      if (kanape.color != ""){ //si la couleur est choisie
-        alert('couleur ok');
-        myBasket = JSON.parse(localStorage.getItem("kanape"))//on recupère le panier
-      } else{                              // sinon on montre ce qu'il y a dans le panier
-        alert ("merci de choisir une couleur");
-      } 
 
-      if (myBasket == null){ //si le panier n'existe pas
-        myBasket = []; // creation de panier
-        myBasket.push(kanape); // on ajout objet dans le panier
-        localStorage.setItem("kanape", JSON.stringify(myBasket)); //on met le panier dans storage
-      } else{
-        myBasket.push(kanape); //ajoute du canape au panier
-        localStorage.setItem("kanape", JSON.stringify(myBasket)); //on met le panier dans storage
-        console.log('canapé est rajouté dans le panier');
-       }  
      
        
 

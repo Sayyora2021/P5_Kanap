@@ -1,7 +1,30 @@
-//afficher les produits depuis localStorage
-let numberOfItem = localStorage.length
-//JSON.parse(localStorage.getItem("kanape"));
+//afficher le produit sélectionné depuis localStorage
 console.log('numberOfItem');
+const cart =[]
+
+cart.forEach((item) => displayItem(item))
+
+giveFromCart ()
+console.log(cart)
+function giveFromCart (){
+  let numberOfItem = localStorage.length
+  for (let i =0; i< numberOfItem; i++){
+  const item = localStorage.getItem(localStorage.key(i))
+  console.log("objet à la position ",i," et ",item)
+  const itemObject = JSON.parse(item)
+  cart.push(itemObject)
+}
+}
+/*
+color: "Blue"
+id: "107fb5b75607497b96722bda5b504926"
+quantity: 1*/
+
+
+  let displayArticle = document.getElementById('cart__items')
+  displayArticle.textContent = (`${displayArticle.cart__items}`) 
+console.log("cart_items est là")
+
 
 //recuperer les elements by id
 /*const theProducts = document.getElementById('cart__items');
