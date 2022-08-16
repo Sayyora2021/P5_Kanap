@@ -69,7 +69,7 @@ function buttonClick(){
   quantity:Number (kanapQuantity),
  }
  /*localStorage.setItem("kanape", JSON.stringify("myBasket"));*/
- // window.location.href = "cart.html"
+ //window.location.href = "cart.html"
  console.log(kanape);
  
  //condition qui affishe les objets sélectionnés 
@@ -90,13 +90,18 @@ function buttonClick(){
 			localStorage.setItem("myBasket", JSON.stringify(myBasket)); //on met le panier dans storage
 		
     } 
-	} else {
+ 	} else {
 		alert("merci de choisir une couleur");
 	} 
 }else{
 	alert('merci de choisir une quantité');
 }
 
+/*for (const item of myBasket){
+if (item.id == kanape.id && item.color == kanape.color)
+kanape.quantity+=1
+console.log('kanap ok')
+}*/
 
      
        

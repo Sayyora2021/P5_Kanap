@@ -1,5 +1,5 @@
 //afficher le produit sélectionné depuis localStorage
-/*const giveFromStorage = JSON.parse(localStorage.getItem("myBasket"));
+const giveFromStorage = JSON.parse(localStorage.getItem("myBasket"));
 console.table(giveFromStorage);
 
 
