@@ -1,4 +1,18 @@
-const panier =[]
+//afficher le produit sélectionné depuis localStorage(il fonctionne pour tableau)
+const giveFromStorage = JSON.parse(localStorage.getItem("myBasket"));
+console.table(giveFromStorage);
+
+let addBasket=[];
+for (let i=0; i< giveFromStorage; i++){
+  console.log(i)
+  const item = localStorage.getItem(localStorage.key(i))
+  console.log("objest est dans la position",i, "et", item)
+
+}
+
+
+
+/*const panier =[]
 
 
 giveBasket()
@@ -49,14 +63,6 @@ function makeImage(item){
 }
 
 /*
-//afficher le produit sélectionné depuis localStorage(il fonctionne pour tableau)
-const giveFromStorage = JSON.parse(localStorage.getItem("myBasket"));
-console.table(giveFromStorage);
-
-//let addBasket=[];
-/*for (let i=0; i< giveFromStorage; i++){
-  console.log(i)
-  const item = localStorage.getItem(localStorage.key(i))
 
 
 

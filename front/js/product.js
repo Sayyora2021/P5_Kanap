@@ -102,7 +102,9 @@ if (item.id == kanape.id && item.color == kanape.color)
 kanape.quantity+=1
 console.log('kanap ok')
 }*/
-
+/*if(i == 0, i<myBasket){
+  console.log('montrer le panier')
+}*/
      
        
 
