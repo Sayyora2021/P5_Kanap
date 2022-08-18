@@ -12,7 +12,16 @@ let cart=[]
 giveFromStorage.forEach(function(value){
   console.log(value);
   fetch(`http://localhost:3000/api/products/${value.id}`)
+
 })
+
+const article = document.createElement("article");
+console.log('article')
+article.classList.add("cart__item")
+console.log('cart__item')
+//let dataId = document.getElementById("product-ID");
+//console.log(dataId);
+/*
 //---------------------------------------nouveau code ici--------
 //afficher les objets de panier TEST 
 /*for (let i in giveFromStorage){
@@ -24,12 +33,6 @@ giveFromStorage.forEach(function(value){
  }
  //)
 
-const article = document.createElement("article");
-console.log('article')
-article.classList.add("cart__item")
-console.log('cart__item')
-let dataId = document.getElementById("product-ID");
-console.log(dataId);
 
 /*ne fonctionne pas
 function displayArticle(article){
