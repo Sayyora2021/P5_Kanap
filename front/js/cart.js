@@ -2,13 +2,40 @@
 const giveFromStorage = JSON.parse(localStorage.getItem("myBasket"));
 console.table(giveFromStorage);
 
-let addBasket=[];
-for (let i=0; i< giveFromStorage; i++){
-  console.log(i)
-  const item = localStorage.getItem(localStorage.key(i))
-  console.log("objest est dans la position",i, "et", item)
+const sectionItem = document.getElementById('cart__items')
+console.log(sectionItem)
 
+let addBasket=[];
+
+
+giveBasket()
+
+
+function giveBasket (){
+for (let i=0; i< giveFromStorage.length; i++){
+  addBasket.push(giveFromStorage[i])
+   
 }
+  return addBasket
+}
+
+//récupérer id avec map
+let kanaps = addBasket.map(element =>{
+  return element.id 
+})
+console.log(kanaps);
+
+
+
+
+//récuperer un element de array
+/*addBasket.forEach(element=>{
+  console.log(element.id)
+})
+article = document.createElement("article");
+items.appendChild(article);
+a.appendChild(article);
+/*
 
 
 
@@ -62,14 +89,25 @@ function makeImage(item){
   return image
 }
 
-/*
+/*function getData (){
+  if (myBasket !== null){
+    //si le panier n'est pas vide
+    fetch(`http://localhost:3000/api/products/${idProduct}`)
+  .then((response) => response.json())
+  .then((product) => {
+    const sectionItem = document.getElementById('cart__items')
 
-
-
-//const displayArticle = document.getElementById('cart__items')
-//console.log("cart_items est là")
-/*if(item.id === kanape.id && item.color === kanape.color)
-  kanape.id
+    product.forEach((item) =>{
+      myBasket.forEach((element)=>{
+         if (element.id ===item.id){
+let article = document.createElement("article")
+article.classList.add("cart__item")
+         }
+      })
+    })
+    })
+  }
+}
 
 
 

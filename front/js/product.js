@@ -7,11 +7,11 @@ const itemImg = document.querySelector('.item__img');
 //pour recuperer le produit
 fetch(`http://localhost:3000/api/products/${idProduct}`)
   .then((response) => response.json())
-  .then((res) => display(res))
+  .then((product) => {
     
 
 //fonction qui a img,title,price, description, loop-color
-  function display (product){
+  //function display (product){
     const imageKanap = document.createElement('img');
     imageKanap.src = product.imageUrl;
     imageKanap.alt = product.altTxt;
@@ -37,7 +37,7 @@ fetch(`http://localhost:3000/api/products/${idProduct}`)
      let select = document.getElementById('colors')
      select.appendChild(dropdown);
  }
-};
+});
  
  // Initialisation du panier
  let myBasket = [];
@@ -97,13 +97,18 @@ function buttonClick(){
 	alert('merci de choisir une quantité');
 }
 
+//si même id et même couleur, montrer la quantité
+
 /*for (const item of myBasket){
 if (item.id == kanape.id && item.color == kanape.color)
 kanape.quantity+=1
 console.log('kanap ok')
 }*/
+
+//si le panier est vide, redirect sur la page d'accueil
 /*if(i == 0, i<myBasket){
-  console.log('montrer le panier')
+  console.log('montrez le panier')
+  //window.location.href = "index.html"
 }*/
      
        
