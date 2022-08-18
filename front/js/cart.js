@@ -14,10 +14,7 @@ let cart=[]
 //afficher les objets de panier TEST 
 for (let i in giveFromStorage){
   console.log("les canapés sont dans le panier"+ giveFromStorage[i])
-    if (cart == null)
-    cart=[]
-    cart.push(giveFromStorage)
-    console.log([i])
+    console.log(giveFromStorage[i])
  }
 
 const article = document.createElement("article");
