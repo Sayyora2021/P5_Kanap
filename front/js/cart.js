@@ -6,18 +6,49 @@ const giveFromStorage = JSON.parse(localStorage.getItem("myBasket"));
 const sectionItem = document.getElementById('cart__items')
 console.log(sectionItem)
 
-//creation de panier
-let cart=[]
 
-for (let i in giveFromStorage){
-  console.log("les canapés sont dans le panier"+ giveFromStorage[i])
-    console.log(giveFromStorage[i])
+
+
+for (let value of giveFromStorage){
+      console.log(value)
+  fetch(`http://localhost:3000/api/products/${value.id}`)
+  .then((response) => response.json())
+  .then((product) => {
+
+//creation de div avec image
+let div = document.querySelector("cart__item__img");
+console.log(div);
+let image = document.createElement("img");
+image.src =product.imageUrl;
+image.alt = product.altTxt;
+//div.appendChild(image)
+console.log(image)
+
+
+//création d'article avec data-id & data-color
+const article = document.querySelector("article");
+console.log('article') //null
+article.classList.add("cart__item")
+article.setAttribute("data-id", value.id)
+article.setAttribute("data-color",value.color)
+
+
+
+//créationde div-item-content
+let itemContent = document.querySelector('cart__item__content');
+console.log(itemContent);  //null
+
+let contentDescrip = document.querySelector("cart__item__content__description");
+contentDescrip.textContent = (`${product.description}`);
+console.log(contentDescrip);   //null
+
+let text = document.querySelector("h2");
+console.log(text)
+
+ })
 }
 
-const article = document.createElement("article");
-console.log('article')
-article.classList.add("cart__item")
-console.log('cart__item')
+
 //let dataId = document.getElementById("product-ID");
 //console.log(dataId);
 /*
