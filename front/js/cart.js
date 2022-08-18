@@ -2,17 +2,30 @@
 const giveFromStorage = JSON.parse(localStorage.getItem("myBasket"));
 //console.table(giveFromStorage);
 
+//récuperation de la section item by id
+const sectionItem = document.getElementById('cart__items')
+console.log(sectionItem)
+
+//creation de panier
+let cart=[]
+
 
 //---------------------------------------nouveau code ici--------
-//afficher le panier asynchrone
-const displayPanier = async ()=> {
-  console.log("hello");
-  if(giveFromStorage){
-    await giveFromStorage;
-    console.log(giveFromStorage);
-  }
-}
-displayPanier();
+//afficher les objets de panier TEST 
+for (let i in giveFromStorage){
+  console.log("les canapés sont dans le panier"+ giveFromStorage[i])
+    if (cart == null)
+    cart=[]
+    cart.push(giveFromStorage)
+    console.log([i])
+ }
+
+const article = document.createElement("article");
+console.log('article')
+article.classList.add("cart__item")
+console.log('cart__item')
+let dataId = document.getElementById("product-ID");
+console.log(dataId);
 
 /*//ne fonctionne pas
 function displayArticle(article){
@@ -21,28 +34,20 @@ function displayArticle(article){
 }
  function makeArticle (item){
   const article = document.createElement("article")
-  article.classList.add("cart__item")
-  article.dataset.id = (`${product-ID}`);
-  article.dataset.color = item.color
+ 
   return article
  }
 makeArticle();
 //--------------mon ancien code---------
-/*const sectionItem = document.getElementById('cart__items')
-console.log(sectionItem)
+/*
 
-let addBasket=[];
- let kanapDescription = document.getElementById('description');
-    kanapDescription.textContent = (`${product.description}`);
+
 
 giveBasket()
 
 
 function giveBasket (){
-for (let i in giveFromStorage){
- console.log("les canapés sont dans le panier"+ giveFromStorage[i])
-   
-}
+
   //return addBasket
 }*/
 //----------------s'arrete ici--------------
