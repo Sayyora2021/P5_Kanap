@@ -9,13 +9,20 @@ console.log(sectionItem)
 //creation de panier
 let cart=[]
 
-
+giveFromStorage.forEach(function(value){
+  console.log(value);
+  fetch(`http://localhost:3000/api/products/${value.id}`)
+})
 //---------------------------------------nouveau code ici--------
 //afficher les objets de panier TEST 
-for (let i in giveFromStorage){
+/*for (let i in giveFromStorage){
   console.log("les canapés sont dans le panier"+ giveFromStorage[i])
     console.log(giveFromStorage[i])
+    //fetch(`http://localhost:3000/api/products/${giveFromStorage[i]}`)
+  /*.then((response) => response.json())
+  .then((product) => {
  }
+ //)
 
 const article = document.createElement("article");
 console.log('article')
@@ -24,7 +31,7 @@ console.log('cart__item')
 let dataId = document.getElementById("product-ID");
 console.log(dataId);
 
-/*//ne fonctionne pas
+/*ne fonctionne pas
 function displayArticle(article){
   document.getElementById("cart__item").appendChild
   (article)
