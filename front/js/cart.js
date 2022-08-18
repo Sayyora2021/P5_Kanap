@@ -1,26 +1,54 @@
 //afficher le produit sélectionné depuis localStorage(il fonctionne pour tableau)
 const giveFromStorage = JSON.parse(localStorage.getItem("myBasket"));
-console.table(giveFromStorage);
+//console.table(giveFromStorage);
 
-const sectionItem = document.getElementById('cart__items')
+
+//---------------------------------------nouveau code ici--------
+//afficher le panier asynchrone
+const displayPanier = async ()=> {
+  console.log("hello");
+  if(giveFromStorage){
+    await giveFromStorage;
+    console.log(giveFromStorage);
+  }
+}
+displayPanier();
+
+/*//ne fonctionne pas
+function displayArticle(article){
+  document.getElementById("cart__item").appendChild
+  (article)
+}
+ function makeArticle (item){
+  const article = document.createElement("article")
+  article.classList.add("cart__item")
+  article.dataset.id = (`${product-ID}`);
+  article.dataset.color = item.color
+  return article
+ }
+makeArticle();
+//--------------mon ancien code---------
+/*const sectionItem = document.getElementById('cart__items')
 console.log(sectionItem)
 
 let addBasket=[];
-
+ let kanapDescription = document.getElementById('description');
+    kanapDescription.textContent = (`${product.description}`);
 
 giveBasket()
 
 
 function giveBasket (){
-for (let i=0; i< giveFromStorage.length; i++){
-  addBasket.push(giveFromStorage[i])
+for (let i in giveFromStorage){
+ console.log("les canapés sont dans le panier"+ giveFromStorage[i])
    
 }
-  return addBasket
-}
+  //return addBasket
+}*/
+//----------------s'arrete ici--------------
 
 //récupérer id avec map
-let kanaps = addBasket.map(element =>{
+/*let kanaps = addBasket.map(element =>{
   return element.id 
 })
 console.log(kanaps);
@@ -66,17 +94,7 @@ function displayItems (item){
 
 }
 
-function displayArticle(article){
-  document.querySelector("#cart__item").appendChild
-  (article)
-}
- function makeArticle (item){
-  const article = document.createElement("article")
-  article.classList.add("cart__item")
-  article.dataset.id = item.id
-  article.dataset.color = item.color
-  return article
- }
+
 
 
 function makeImage(item){
