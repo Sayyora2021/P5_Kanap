@@ -9,11 +9,10 @@ console.log(sectionItem)
 //creation de panier
 let cart=[]
 
-giveFromStorage.forEach(function(value){
-  console.log(value);
-  fetch(`http://localhost:3000/api/products/${value.id}`)
-
-})
+for (let i in giveFromStorage){
+  console.log("les canapés sont dans le panier"+ giveFromStorage[i])
+    console.log(giveFromStorage[i])
+}
 
 const article = document.createElement("article");
 console.log('article')
