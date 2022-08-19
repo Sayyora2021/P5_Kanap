@@ -126,8 +126,8 @@ let totalQte = document.getElementById("totalQuantity");
 console.log(totalQte)
 
 //création de variable pour la quantité
-let totalChiffre = value.quantity;
-console.log(totalChiffre);
+/*let totalChiffre = value.quantity;
+console.log(totalChiffre);*/
 
 //le prix total 
 let totalPrice = document.getElementById("totalPrice");
