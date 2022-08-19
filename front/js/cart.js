@@ -48,6 +48,12 @@ divContent.classList.add("cart__item__content");
 article.appendChild(divContent)
 console.log(divContent);  
 
+//récupérer h2+ le nom du canapé
+let text = document.createElement("h2");
+text.textContent = product.name;
+divContent.appendChild(text)
+console.log(text);
+
 //récupérer le div+ description
 let divDescrip = document.createElement("div");
 divDescrip.classList = ("cart__item__content__description");
@@ -55,153 +61,62 @@ divDescrip.textContent= product.description;
 divContent.appendChild(divDescrip);
 console.log(divDescrip);  
 
-
-//récupérer h2+ le nom du canapé
-let text = document.createElement("h2");
-text.textContent = product.name;
-divDescrip.appendChild(text)
-console.log(text);
-
-
 //récupérer la couleur 
 let pcolor = document.createElement("p")
-pcolor.textContent= product.colors;
+pcolor.textContent= value.color;
 divContent.appendChild(pcolor);
 console.log(pcolor)
-/*const color = document.getElementById('colors');
- let couleur = product.value;
- console.log(couleur);*/
 
+//récupérer le prix
  let price = document.createElement("p");
  price.textContent = product.price;
  divContent.appendChild(price);
  console.log(price);
- })
-}
 
-
-//let dataId = document.getElementById("product-ID");
-//console.log(dataId);
-/*
-//---------------------------------------nouveau code ici--------
-//afficher les objets de panier TEST 
-/*for (let i in giveFromStorage){
-  console.log("les canapés sont dans le panier"+ giveFromStorage[i])
-    console.log(giveFromStorage[i])
-    //fetch(`http://localhost:3000/api/products/${giveFromStorage[i]}`)
-  /*.then((response) => response.json())
-  .then((product) => {
- }
- //)
-
-
-/*ne fonctionne pas
-function displayArticle(article){
-  document.getElementById("cart__item").appendChild
-  (article)
-}
- function makeArticle (item){
-  const article = document.createElement("article")
+ //création de setting poiur la quantité
+ let setting = document.createElement("div");
+setting.classList.add("cart__item__content__settings");
+divContent.appendChild(setting)
+console.log(setting); 
  
-  return article
- }
-makeArticle();
-//--------------mon ancien code---------
-/*
+//afficher la quantité
+let dquantity = document.createElement("div");
+dquantity.classList.add("cart__item__content__settings__quantity");
+dquantity.textContent= value.quantity;
+setting.appendChild(dquantity)
+console.log(dquantity); 
 
 
+let quantite = document.createElement("p");
+quantite.innerHTML = "Qté:";
+ dquantity.appendChild(quantite);
+ console.log(quantite);
 
-giveBasket()
+ let numberInput= document.createElement('input');
+ numberInput.setAttribute('type', 'number')
+ console.log(numberInput);
+ dquantity.appendChild(numberInput)
+ Object.assign(numberInput, {
+  min: 1,
+  max: 100,
+ })
+ 
+})
+ 
+}
 
 
-function giveBasket (){
+ 
 
-  //return addBasket
-}*/
-//----------------s'arrete ici--------------
 
 //récupérer id avec map
 /*let kanaps = addBasket.map(element =>{
   return element.id 
 })
-console.log(kanaps);
+console.log(kanaps);*/
 
 
 
 
-//récuperer un element de array
-/*addBasket.forEach(element=>{
-  console.log(element.id)
-})
-article = document.createElement("article");
-items.appendChild(article);
-a.appendChild(article);
-/*
-
-
-
-/*const panier =[]
-
-
-giveBasket()
-console.log(panier)
-panier.forEach((item) => displayItems (item))
-
-function giveBasket (){
-  const numberOfItems = localStorage.length
-for(let i=0; i< numberOfItems; i++){
-  console.log(i)
-  const item = localStorage.getItem(localStorage.key(i))
-  console.log("objest est dans la position",i, "et", item)
-  const itemObject = JSON.parse(item);
-  panier.push(itemObject)
-}
-
-}
-
-function displayItems (item){
-  const article = makeArticle(item)
-  displayArticle (article)
-  console.log(article)
-  const image = makeImage(item)
-
-}
-
-
-
-
-function makeImage(item){
-  const div = document.createElement("div")
-  div.classList.add("cart__item__img")
-  const image = document.createElement("img")
-  image.src = item.imageUrl
-  image.alt = item.altTxt;
-  div.appendChild(image)
-  return image
-}
-
-/*function getData (){
-  if (myBasket !== null){
-    //si le panier n'est pas vide
-    fetch(`http://localhost:3000/api/products/${idProduct}`)
-  .then((response) => response.json())
-  .then((product) => {
-    const sectionItem = document.getElementById('cart__items')
-
-    product.forEach((item) =>{
-      myBasket.forEach((element)=>{
-         if (element.id ===item.id){
-let article = document.createElement("article")
-article.classList.add("cart__item")
-         }
-      })
-    })
-    })
-  }
-}
-
-
-
-*/
 
 
