@@ -39,9 +39,6 @@ fetch(`http://localhost:3000/api/products/${idProduct}`)
  }
 });
  
- // Initialisation du panier
- let myBasket = [];
-
 //creation de bouton
 const button =document.getElementById('addToCart')
 
@@ -78,7 +75,7 @@ function buttonClick(){
 	
   if (kanape.color != ""){ //si la couleur est choisie
 		alert('couleur ok');
-		myBasket = JSON.parse(localStorage.getItem("myBasket"))//on récupère le panier
+		let myBasket = JSON.parse(localStorage.getItem("myBasket"))//on récupère le panier
 
 		if (myBasket == null){ //si le panier n'existe pas
 			myBasket = []; // création du panier
@@ -86,6 +83,19 @@ function buttonClick(){
 			localStorage.setItem("myBasket", JSON.stringify(myBasket)); //on met le panier dans storage
 		
     }	else {  // sinon 
+
+
+//test pour savoir si le produit est déjà dans le panier on modifie la quantité et on remet le panier dans storage
+// si il n'est pas dans le panier dans storage
+           if (myBasket != null){  //si le canape n'est pas vide
+   kanape.quantity+=1;            // on modifie la quantité
+   myBasket.push(kanape); // ajout du canapé au panier
+			localStorage.setItem("myBasket", JSON.stringify(myBasket)); // on remet dans storage
+      }for (const item of myBasket){
+          if (item.id == kanape.id && item.color == kanape.color)
+         kanape.quantity+=1
+         console.log('kanap ok')
+       }
 			myBasket.push(kanape); // ajout du canapé au panier
 			localStorage.setItem("myBasket", JSON.stringify(myBasket)); //on met le panier dans storage
 		
