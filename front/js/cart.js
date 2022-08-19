@@ -2,9 +2,7 @@
 const giveFromStorage = JSON.parse(localStorage.getItem("myBasket"));
 //console.table(giveFromStorage);
 
-//récuperation de la section item by id
-const sectionItem = document.getElementById('cart__items')
-console.log(sectionItem)
+
 
 
 
@@ -14,37 +12,70 @@ for (let value of giveFromStorage){
   fetch(`http://localhost:3000/api/products/${value.id}`)
   .then((response) => response.json())
   .then((product) => {
+console.log(product);
 
-//creation de div avec image
-let div = document.querySelector("cart__item__img");
-console.log(div);
-let image = document.createElement("img");
-image.src =product.imageUrl;
-image.alt = product.altTxt;
-//div.appendChild(image)
-console.log(image)
+//récuperation de la section item by id
+const sectionItem = document.getElementById('cart__items')
+console.log(sectionItem)
 
-
-//création d'article avec data-id & data-color
-const article = document.querySelector("article");
-console.log('article') //null
+//création d'article avec data-id & data-color, on donne value =>produit du panier
+const article = document.createElement("article");
+console.log(article) 
 article.classList.add("cart__item")
 article.setAttribute("data-id", value.id)
 article.setAttribute("data-color",value.color)
+sectionItem.appendChild(article)
 
 
+//creation de div avec image
+let divImg = document.createElement("div");
+divImg.classList.add("cart__item__img");
+article.appendChild(divImg)
+console.log(divImg); 
 
-//créationde div-item-content
-let itemContent = document.querySelector('cart__item__content');
-console.log(itemContent);  //null
 
-let contentDescrip = document.querySelector("cart__item__content__description");
-contentDescrip.textContent = (`${product.description}`);
-console.log(contentDescrip);   //null
+//creation d'image
+let image = document.createElement("img");
+image.src =product.imageUrl;
+image.alt = product.altTxt;
+divImg.appendChild(image)
+console.log(image)
 
-let text = document.querySelector("h2");
-console.log(text)
 
+//création de div-item-content
+let divContent = document.createElement('div');
+divContent.classList.add("cart__item__content");
+article.appendChild(divContent)
+console.log(divContent);  
+
+//récupérer le div+ description
+let divDescrip = document.createElement("div");
+divDescrip.classList = ("cart__item__content__description");
+divDescrip.textContent= product.description;
+divContent.appendChild(divDescrip);
+console.log(divDescrip);  
+
+
+//récupérer h2+ le nom du canapé
+let text = document.createElement("h2");
+text.textContent = product.name;
+divDescrip.appendChild(text)
+console.log(text);
+
+
+//récupérer la couleur 
+let pcolor = document.createElement("p")
+pcolor.textContent= product.colors;
+divContent.appendChild(pcolor);
+console.log(pcolor)
+/*const color = document.getElementById('colors');
+ let couleur = product.value;
+ console.log(couleur);*/
+
+ let price = document.createElement("p");
+ price.textContent = product.price;
+ divContent.appendChild(price);
+ console.log(price);
  })
 }
 
