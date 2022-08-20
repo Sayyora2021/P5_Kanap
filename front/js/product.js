@@ -67,9 +67,11 @@ function buttonClick(){
  /*localStorage.setItem("kanape", JSON.stringify("myBasket"));*/
  //window.location.href = "cart.html"
  console.log(kanape);
- 
+
+
+ //----------ancient condition------
  //condition qui affishe les objets sélectionnés 
- if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100){ // si la quantité est entre 1 et 100
+/* if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100){ // si la quantité est entre 1 et 100
 	alert("quantity ok");
 	
   if (kanape.color != ""){ //si la couleur est choisie
@@ -82,17 +84,44 @@ function buttonClick(){
 			localStorage.setItem("myBasket", JSON.stringify(myBasket)); //on met le panier dans storage
 		
     }	else {  // sinon 
-      let flagId = false; 
-const findProduct = myBasket.find((el) =>el.id === idProduct && el.color === kanape.color)
-if (findProduct){
-  let newQuantity = Number (kanapQuantity)  + findProduct.quantity;
-  findProduct.quantity = newQuantity;
- console.log(findProduct)
- localStorage.setItem("myBasket", JSON.stringify(myBasket))
-}
+      myBasket.push(kanape); // ajout du canapé au panier
+			localStorage.setItem("myBasket", JSON.stringify(myBasket)); //on met le panier dans storage
+		
+    } 
+ 	} else {
+		alert("merci de choisir une couleur");
+	} 
+}else{
+	alert('merci de choisir une quantité');
+}*/
+//----------------s'arrete ici---------------
 
+//-------nouveau test commence ici---------------
+//test pour savoir si le produit est déjà dans le panier on modifie la quantité et on remet le panier dans storage
+// si il n'est pas dans le panier dans storage
+//si même id et même couleur, montrer la quantité
+if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100){ // si la quantité est entre 1 et 100
+	alert("quantity ok");
+	
+  if (kanape.color != ""){ //si la couleur est choisie
+		alert('couleur ok');
+		let myBasket = JSON.parse(localStorage.getItem("myBasket"))//on récupère le panier
 
-			myBasket.push(kanape); // ajout du canapé au panier
+		if (myBasket == null){ //si le panier n'existe pas
+			myBasket = []; // création du panier
+			//myBasket.push(kanape); // ajout du canapé au panier
+			localStorage.setItem("myBasket", JSON.stringify(myBasket)); //on met le panier dans storage
+		
+    }	let flagId = false; 
+    const findProduct = myBasket.find((el) =>el.id === idProduct && el.color === kanape.color)
+    if (findProduct){
+      let newQuantity = Number (kanapQuantity)  + findProduct.quantity;
+      findProduct.quantity = newQuantity;
+     console.log(findProduct)
+     localStorage.setItem("myBasket", JSON.stringify(myBasket))
+    }
+    else {  // sinon 
+      myBasket.push(kanape); // ajout du canapé au panier
 			localStorage.setItem("myBasket", JSON.stringify(myBasket)); //on met le panier dans storage
 		
     } 
@@ -102,38 +131,12 @@ if (findProduct){
 }else{
 	alert('merci de choisir une quantité');
 }
-//test pour savoir si le produit est déjà dans le panier on modifie la quantité et on remet le panier dans storage
-// si il n'est pas dans le panier dans storage
-//si même id et même couleur, montrer la quantité
 
-/*for (const item of myBasket){
-if (item.id == kanape.id && item.color == kanape.color)
-kanape.quantity+=1
-console.log('kanap ok')
-}
+
+
+
 //---------TEST-----------
-let myBasket = JSON.parse(localStorage.getItem("kanape"))
-let flagId = false; 
-for (let i in myBasket){
-  if(myBasket[i].id== idProduct && myBasket[i].color == color){
-myBasket[i].quantity = parseInt(myBasket[i].quantity) +parseInt.quantity;
-flagId = true
-  }
-}
-/*
-  myBasket.push(kanape); // ajout du canapé au panier
-     localStorage.setItem("myBasket", JSON.stringify(myBasket)); // on remet dans storage
-     }for (const item of myBasket){
-         if (item.id == kanape.id && item.color == kanape.color)
-        item.quantity+kanapQuantity
-        console.log('kanap ok')
-      }
 
-//si le panier n'est pas vide, redirect sur la page d'accueil
-/*if(i == 0, i<=myBasket){
-  console.log('montrez le panier')
-  //window.location.href = "index.html"
-}*/
      
        
 
