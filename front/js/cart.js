@@ -1,10 +1,10 @@
 //afficher le produit sélectionné depuis localStorage(il fonctionne pour tableau)
 const giveFromStorage = JSON.parse(localStorage.getItem("myBasket"));
-//console.table(giveFromStorage);
+console.log(giveFromStorage);
 
 
 
-
+let totalQuantity = [0]
 
 for (let value of giveFromStorage){
       console.log(value)
@@ -125,32 +125,62 @@ setDelete.appendChild(pDelete)
 pDelete.textContent= 'Supprimer';
 }
 
-//-------------TOTAL QUANTITE-----------
+//-------------TOTAL QUANTITE & PRICE-----------
 //total quantité
+/*function displayTotalNum (item) {
+  let total =0;
+  
+  giveFromStorage.forEach(item => {
+   const totalSomme=  product.price * item.quantity
+   total = total + totalSomme
+  })
+  console.log(total);
+}*/
 
 let totalQte = document.getElementById("totalQuantity");
-//totalQte.textContent = value.quantity;
+//totalQte.textContent = giveFromStorage.quantity;
 console.log(totalQte);
-//le prix total 
+
+
+
+//le prix total et calcule du prix
 let totalPrice = document.getElementById("totalPrice");
-console.log(totalPrice)     
-//totalPrice.textContent = product.price;
-
-//calcul de prix
-const itemTotalPrice = value.quantity * product.price;
-console.log(itemTotalPrice);
-totalPrice.textContent= itemTotalPrice;
+  totalPrice.textContent= giveFromStorage.quantity;
+//totalPrice = totalQuantity;
+console.log(totalPrice);
 
 
-console.log(value.id)
 //calcul de quantité
-const itemTotalQuantity = value.id * value.quantity;//à refaire, nefonctionne pas
-console.log(itemTotalQuantity);
-totalQte.textContent= itemTotalQuantity;
-//création de variable pour la quantité
-/*let totalChiffre = value.quantity;
-console.log(totalChiffre);*/
+/*const totalQuantity = giveFromStorage.find((el) =>el.id == value.id) 
+total = value.quantity + totalQuantity.quantity;
+//totalQuantity = totalQte;
+//totalQte.textContent = totalQuantity;
+console.log(total);*/
+  
+//----------------test boocles for calcul price & quantity-------------------
 
+giveFromStorage.forEach(item => {
+  const totalNumber = value.quantity * product.price;
+
+  
+  //const totalNumber = value.quantity + giveFromStorage.quantity
+  console.log(totalNumber)
+  
+});
+
+//el.quantity == value.id) 
+
+
+
+
+//const firstItemQuantity = value.quantity * product.price;
+//const firstItemPrice = value.quantity + firstItem.quantity;
+
+
+
+
+
+//-------------test-----------------------------
 
 
 

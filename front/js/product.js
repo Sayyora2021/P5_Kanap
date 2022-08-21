@@ -69,37 +69,7 @@ function buttonClick(kanap){
  console.log(kanape);
 
 
- //----------ancient condition------
- //condition qui affishe les objets sélectionnés 
-/* if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100){ // si la quantité est entre 1 et 100
-	alert("quantity ok");
-	
-  if (kanape.color != ""){ //si la couleur est choisie
-		alert('couleur ok');
-		let myBasket = JSON.parse(localStorage.getItem("myBasket"))//on récupère le panier
-
-		if (myBasket == null){ //si le panier n'existe pas
-			myBasket = []; // création du panier
-			myBasket.push(kanape); // ajout du canapé au panier
-			localStorage.setItem("myBasket", JSON.stringify(myBasket)); //on met le panier dans storage
-		
-    }	else {  // sinon 
-      myBasket.push(kanape); // ajout du canapé au panier
-			localStorage.setItem("myBasket", JSON.stringify(myBasket)); //on met le panier dans storage
-		
-    } 
- 	} else {
-		alert("merci de choisir une couleur");
-	} 
-}else{
-	alert('merci de choisir une quantité');
-}*/
-//----------------s'arrete ici---------------
-
-//-------nouveau test commence ici---------------
-//test pour savoir si le produit est déjà dans le panier on modifie la quantité et on remet le panier dans storage
-// si il n'est pas dans le panier dans storage
-
+//Conditions
 if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100){ // si la quantité est entre 1 et 100
 	alert("quantity ok");
 	
@@ -114,7 +84,7 @@ if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100){ // si la quantit�
 		
 
    //si même id et même couleur, montrer la quantité
-    }	const findProduct = myBasket.find((el) =>el.id === idProduct && el.color === kanape.color)//chercher dans le panier même id et même couleur
+    }	const findProduct = myBasket.find((el) =>el.id === idProduct && el.color === kanape.color)//chercher si même id et même couleur
     if (findProduct){                                               //si ce produit existe 
       let newQuantity = Number (kanapQuantity)  + findProduct.quantity;   //on créé la quantité = quantité.value+ panier.quantité
       findProduct.quantity = newQuantity;         //panier.quantité est égale à newQuantité
@@ -134,13 +104,7 @@ if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100){ // si la quantit�
 	alert('merci de choisir une quantité');
 }
 
-
-
-
-//---------TEST-----------
-
-     
-       
+    
 
     };
        
