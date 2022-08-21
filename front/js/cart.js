@@ -6,7 +6,6 @@ const giveFromStorage = JSON.parse(localStorage.getItem("myBasket"));
 
 
 
-
 for (let value of giveFromStorage){
       console.log(value)
   fetch(`http://localhost:3000/api/products/${value.id}`)
@@ -108,31 +107,53 @@ quantite.innerHTML = "Qté:";
   min: 1,
   max: 100,
  })*/
- 
+
+ //-------DELETE------------------------------
 //création de delete
+deleteSetting(setting)
+
+
+function deleteSetting(setting){
  let setDelete = document.createElement('div');
  setDelete.classList.add("cart__item__content__settings__delete")
  setting.appendChild(setDelete)
- //console.log(setDelete)
+ 
+ let pDelete = document.createElement('p');
+pDelete.classList.add("deleteItem");
 
- let productDelete = document.createElement('p');
-productDelete.classList.add("deleteItem");
-setDelete.appendChild(productDelete)
-productDelete.innerHTML= 'Supprimer';
-//console.log(productDelete)
+setDelete.appendChild(pDelete)
+pDelete.textContent= 'Supprimer';
+}
 
+//-------------TOTAL QUANTITE-----------
 //total quantité
-let totalQte = document.getElementById("totalQuantity");
-console.log(totalQte)
 
+let totalQte = document.getElementById("totalQuantity");
+//totalQte.textContent = value.quantity;
+console.log(totalQte);
+//le prix total 
+let totalPrice = document.getElementById("totalPrice");
+console.log(totalPrice)     
+//totalPrice.textContent = product.price;
+
+//calcul de prix
+const itemTotalPrice = value.quantity * product.price;
+console.log(itemTotalPrice);
+totalPrice.textContent= itemTotalPrice;
+
+
+console.log(value.id)
+//calcul de quantité
+const itemTotalQuantity = value.id * value.quantity;//à refaire, nefonctionne pas
+console.log(itemTotalQuantity);
+totalQte.textContent= itemTotalQuantity;
 //création de variable pour la quantité
 /*let totalChiffre = value.quantity;
 console.log(totalChiffre);*/
 
-//le prix total 
-let totalPrice = document.getElementById("totalPrice");
-console.log(totalPrice)     //à refaire, nefonctionne pas
-totalPrice.textContent = value.price
+
+
+
 
 let messageError = document.getElementById('firstNameErrorMsg')
 console.log(messageError)

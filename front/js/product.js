@@ -46,7 +46,7 @@ const button =document.getElementById('addToCart')
 //creation de fonction button
 button.addEventListener("click", buttonClick)
 
-function buttonClick(){
+function buttonClick(kanap){
   
  console.log("click sur le") ;
 
@@ -99,7 +99,7 @@ function buttonClick(){
 //-------nouveau test commence ici---------------
 //test pour savoir si le produit est déjà dans le panier on modifie la quantité et on remet le panier dans storage
 // si il n'est pas dans le panier dans storage
-//si même id et même couleur, montrer la quantité
+
 if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100){ // si la quantité est entre 1 et 100
 	alert("quantity ok");
 	
@@ -112,13 +112,15 @@ if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100){ // si la quantit�
 			//myBasket.push(kanape); // ajout du canapé au panier
 			localStorage.setItem("myBasket", JSON.stringify(myBasket)); //on met le panier dans storage
 		
-    }	let flagId = false; 
-    const findProduct = myBasket.find((el) =>el.id === idProduct && el.color === kanape.color)
-    if (findProduct){
-      let newQuantity = Number (kanapQuantity)  + findProduct.quantity;
-      findProduct.quantity = newQuantity;
+
+   //si même id et même couleur, montrer la quantité
+    }	const findProduct = myBasket.find((el) =>el.id === idProduct && el.color === kanape.color)//chercher dans le panier même id et même couleur
+    if (findProduct){                                               //si ce produit existe 
+      let newQuantity = Number (kanapQuantity)  + findProduct.quantity;   //on créé la quantité = quantité.value+ panier.quantité
+      findProduct.quantity = newQuantity;         //panier.quantité est égale à newQuantité
      console.log(findProduct)
-     localStorage.setItem("myBasket", JSON.stringify(myBasket))
+     alert(`L'ajoute de quantité ${quantity.value} a été pris en compte`)
+     localStorage.setItem("myBasket", JSON.stringify(myBasket))// on met le panier dans storage
     }
     else {  // sinon 
       myBasket.push(kanape); // ajout du canapé au panier
