@@ -104,8 +104,6 @@ if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100){ // si la quantitÃ
 	alert('merci de choisir une quantitÃ©');
 }
 
-    
-
     };
        
 
