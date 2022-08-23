@@ -1,4 +1,4 @@
-//récupérer le produit sélectionné depuis localStorage
+//récupérer le panier sélectionné depuis localStorage
 const giveFromStorage = JSON.parse(localStorage.getItem("myBasket"));
 console.log(giveFromStorage);
 
@@ -7,8 +7,14 @@ console.log(giveFromStorage);
 let totalQuantity = 0;
 let totalPrice = 0;
 
+giveFromStorage.forEach((value)=> displayItem (value));
 
-for (let value of giveFromStorage){
+
+
+function displayItem(value) {
+
+
+//for (let value of giveFromStorage){
 
   //calcule de quantity total, on prend 0 += quantity. Il prend la quantity total de localStorage
   displayQuantity();
@@ -24,6 +30,8 @@ for (let value of giveFromStorage){
   .then((response) => response.json())
   .then((product) => {
 console.log(product);
+
+
 
 //le calcule du prix total
 totalPrice  += value.quantity * product.price;
@@ -47,7 +55,8 @@ divImg.classList.add("cart__item__img");
 
 
 //récupérer l'image avec fetch localStorage
-let image = document.createElement("img");
+
+const image = document.createElement("img");
 image.src =product.imageUrl;
 image.alt = product.altTxt;
 
@@ -107,8 +116,15 @@ quantite.innerHTML = "Qté:";
  console.log(numberInput)
 
  
- numberInput.addEventListener("change", () => updQtyPrice (value.id, numberInput.value));
- 
+ numberInput.addEventListener("change",() => updPriceQuantity(value.id, numberInput.value))
+ function updPriceQuantity(id, newValue){
+  console.log(id) 
+  const itemProduct = giveFromStorage.find(value => value.id === id);
+  itemProduct.quantity = Number (newValue)
+  displayQuantity ()
+ }
+
+ //function (updQtyPrice) { }
 
   
  // assign qui copie les valeurs d'un objet qui est énuméarble sur un autre objet cible.
@@ -165,10 +181,6 @@ console.log(messageError)
 }
 
 
-
-
-
- 
 
 
 //récupérer id avec map
