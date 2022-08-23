@@ -1,22 +1,24 @@
+/*
 //récupérer le panier sélectionné depuis localStorage
-const giveFromStorage = JSON.parse(localStorage.getItem("myBasket")) ;
+const giveFromStorage = JSON.parse(localStorage.getItem("myBasket"));
 console.log(giveFromStorage);
+
 
 
 let totalQuantity = 0;
 let totalPrice = 0;
 
-//boucle qui récupère tous les éléments de panier et met dans la fonction displayItem 
 giveFromStorage.forEach((value)=> displayItem (value));
+
 
 
 function displayItem(value) {
 
-  displayQuantity();
+
 //for (let value of giveFromStorage){
 
   //calcule de quantity total, on prend 0 += quantity. Il prend la quantity total de localStorage
-
+  displayQuantity();
 
    function displayQuantity (){  
   totalQuantity += value.quantity;
@@ -112,9 +114,8 @@ quantite.innerHTML = "Qté:";
  numberInput.min = "1";
  numberInput.max = "100";
  numberInput.value = value.quantity;
- console.log(numberInput.value)
+ console.log(numberInput)
 
- 
  
  numberInput.addEventListener("change",() => updPriceQuantity(value.id, numberInput.value))
  function updPriceQuantity(id, newValue){
@@ -123,16 +124,17 @@ quantite.innerHTML = "Qté:";
   itemProduct.quantity = Number (newValue)
   displayQuantity ()
  }
- 
 
- 
+ //function (updQtyPrice) { }
+
+  
  // assign qui copie les valeurs d'un objet qui est énuméarble sur un autre objet cible.
  /*Object.assign(numberInput, {
   min: 1,
   max: 100,
  })*/
 
-
+/*
  //parents & children
  sectionItem.appendChild(article);
  article.appendChild(divImg);
@@ -172,20 +174,15 @@ let messageError = document.getElementById('firstNameErrorMsg')
 console.log(messageError)
   
 });
+
+
+
+
+
 }
+*/
 
 
-/*function renderCartItems (){
-  let totalPrice =0,
-  totalQuantity =0;
-
-  cart.forEach((item)=> {
-    totalPrice += item.price * item.id;
-    totalQuantity += item.id
-    console.log(item.id)
-  })
-totalQte.innerHTML = `Total (${totalQuantity} article): $${totalPrice}`
-}*/
 
 
 //récupérer id avec map
@@ -193,9 +190,3 @@ totalQte.innerHTML = `Total (${totalQuantity} article): $${totalPrice}`
   return element.id 
 })
 console.log(kanaps);*/
-
-
-
-
-
-
