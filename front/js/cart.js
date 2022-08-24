@@ -3,6 +3,9 @@ const giveFromStorage = JSON.parse(localStorage.getItem("myBasket")) ;
 console.log(giveFromStorage);
 
 
+//giveFromStorage.forEach(item =>console.log(item))
+
+ 
 let totalQuantity = 0;
 let totalPrice = 0;
 
@@ -19,7 +22,7 @@ function displayItem(value) {
 
 
    function displayQuantity (){  
-  totalQuantity += value.quantity;
+      totalQuantity += value.quantity;
       let totalQte = document.getElementById("totalQuantity"); 
       totalQte.textContent = totalQuantity;
      
@@ -114,14 +117,16 @@ quantite.innerHTML = "Qté:";
  numberInput.value = value.quantity;
  console.log(numberInput.value)
 
- 
- 
+
  numberInput.addEventListener("change",() => updPriceQuantity(value.id, numberInput.value))
  function updPriceQuantity(id, newValue){
   console.log(id) 
+  console.log(newValue)
+  //totalQuantity += newValue;
   const itemProduct = giveFromStorage.find(value => value.id === id);
   itemProduct.quantity = Number (newValue)
-  displayQuantity ()
+  console.log(totalQuantity)
+ displayQuantity()
  }
  
 
