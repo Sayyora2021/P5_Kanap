@@ -6,7 +6,7 @@ const itemImg = document.querySelector('.item__img');
 
 //pour recuperer le produit
 fetch(`http://localhost:3000/api/products/${idProduct}`)
-  .then((response) => response.json())
+  .then((data) => data.json())
   .then((product) => {
     
 
@@ -44,9 +44,9 @@ const button =document.getElementById('addToCart')
 
 
 //creation de fonction button
-button.addEventListener("click", buttonClick)
+ button.addEventListener("click", buttonClick)
 
-function buttonClick(kanap){
+ function buttonClick(kanap){
   
  console.log("click sur le") ;
 
@@ -85,14 +85,14 @@ if(Number (kanapQuantity) >0 && Number (kanapQuantity) <=100){ // si la quantit�
 
    //si même id et même couleur, montrer la quantité
     }	const findProduct = myBasket.find((el) =>el.id === idProduct && el.color === kanape.color)//chercher si même id et même couleur
-    if (findProduct){                                               //si ce produit existe 
+      if (findProduct){                                               //si ce produit existe 
       let newQuantity = Number (kanapQuantity)  + findProduct.quantity;   //on créé la quantité = quantité.value+ panier.quantité
       findProduct.quantity = newQuantity;         //panier.quantité est égale à newQuantité
      console.log(findProduct)
      alert(`L'ajoute de quantité ${quantity.value} a été pris en compte`)
      localStorage.setItem("myBasket", JSON.stringify(myBasket))// on met le panier dans storage
     }
-    else {  // sinon 
+      else {  // sinon 
       myBasket.push(kanape); // ajout du canapé au panier
 			localStorage.setItem("myBasket", JSON.stringify(myBasket)); //on met le panier dans storage
 		

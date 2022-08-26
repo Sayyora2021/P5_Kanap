@@ -1,186 +1,207 @@
-//récupérer le panier sélectionné depuis localStorage
-const giveFromStorage = JSON.parse(localStorage.getItem("myBasket")) ;
-console.log(giveFromStorage);
+///récupérer le panier sélectionné depuis localStorage
+const giveFromStorage = JSON.parse(localStorage.getItem("myBasket"));
+//console.log(giveFromStorage);
 
 
-//giveFromStorage.forEach(item =>console.log(item))
 
- 
 let totalQuantity = 0;
 let totalPrice = 0;
+
 
 //boucle qui récupère tous les éléments de panier et met dans la fonction displayItem 
 giveFromStorage.forEach((value)=> displayItem (value));
 
-
 function displayItem(value) {
-
-  displayQuantity();
+  
+ 
 //for (let value of giveFromStorage){
 
   //calcule de quantity total, on prend 0 += quantity. Il prend la quantity total de localStorage
-
-
-   function displayQuantity (){  
-      totalQuantity += value.quantity;
+       totalQuantity += value.quantity;
       let totalQte = document.getElementById("totalQuantity"); 
       totalQte.textContent = totalQuantity;
-     
-   }
-
-  fetch(`http://localhost:3000/api/products/${value.id}`)
-  .then((response) => response.json())
-  .then((product) => {
-console.log(product);
+      
+   
+      fetch(`http://localhost:3000/api/products/${value.id}`)
+     .then((response) => response.json())
+     .then((data) => {
 
 
+          //le calcule du prix total
+          totalPrice  += value.quantity * data.price;
+          let totalPriceElement = document.getElementById("totalPrice");
+          totalPriceElement.textContent= totalPrice;
 
-//le calcule du prix total
-totalPrice  += value.quantity * product.price;
-let totalPriceElement = document.getElementById("totalPrice");
-totalPriceElement.textContent= totalPrice;
-
-
-//récuperation de la section item by id
-const sectionItem = document.getElementById('cart__items')
+          //récuperation de la section item by id
+          const sectionItem = document.getElementById('cart__items')
 
 
-//création d'article avec data-id & data-color, on donne value =>produit du panier
-const article = document.createElement("article");
-article.classList.add("cart__item")
-article.setAttribute("data-id", value.id)
-article.setAttribute("data-color",value.color)
+          //création d'article avec data-id & data-color, on donne value =>produit du panier
+          const article = document.createElement("article");
+          article.classList.add("cart__item")
+          article.setAttribute("data-id", value.id)
+          article.setAttribute("data-color",value.color)
 
-//creation de div avec image
-let divImg = document.createElement("div");
-divImg.classList.add("cart__item__img");
+          //creation de div avec image
+          let divImg = document.createElement("div");
+          divImg.classList.add("cart__item__img");
 
 
-//récupérer l'image avec fetch localStorage
-
-const image = document.createElement("img");
-image.src =product.imageUrl;
-image.alt = product.altTxt;
+          //récupérer l'image avec fetch localStorage
+          const image = document.createElement("img");
+          image.src =data.imageUrl;
+          image.alt = data.altTxt;
 
 
 
-//création de div-item-content
-let divContent = document.createElement('div');
-divContent.classList.add("cart__item__content");
+          //création de div-item-content
+          let divContent = document.createElement('div');
+          divContent.classList.add("cart__item__content");
 
+          
+
+          //récupérer le div+ description
+          let divDescrip = document.createElement("div");
+          divDescrip.classList = ("cart__item__content__description");
  
 
-//récupérer le div+ description
-let divDescrip = document.createElement("div");
-divDescrip.classList = ("cart__item__content__description");
- 
-
-//récupérer h2+ le nom du canapé
-let text = document.createElement("h2");
-text.textContent = product.name;
+          //récupérer h2+ le nom du canapé
+          let text = document.createElement("h2");
+          text.textContent = data.name;
 
 
-//récupérer la couleur (avec localStorage)
-let pcolor = document.createElement("p")
-pcolor.textContent= value.color;
+          //récupérer la couleur (avec localStorage)
+          let pcolor = document.createElement("p")
+          pcolor.textContent= value.color;
 
 
 
-//récupérer le prix avec fetch(product)
- let price = document.createElement("p");
- price.textContent = product.price;
+          //récupérer le prix avec fetch(product)
+          let price = document.createElement("p");
+          price.textContent = data.price;
 
 
 
- //création de setting pour la quantité
- let setting = document.createElement("div");
-setting.classList.add("cart__item__content__settings");
+          //création de setting pour la quantité
+          let setting = document.createElement("div");
+          setting.classList.add("cart__item__content__settings");
 
-//création de div pour la quantité
-let dquantity = document.createElement("div");
-dquantity.classList.add("cart__item__content__settings__quantity");
-
-
-// le paragraphe de Qté
-let quantite = document.createElement("p");
-quantite.innerHTML = "Qté:";
-
- 
-
- //creation d' input 
- let numberInput= document.createElement('input');
- numberInput.type ="number";
- numberInput.class = "itemQuantity";
- numberInput.name = "itemQuantity";
- numberInput.min = "1";
- numberInput.max = "100";
- numberInput.value = value.quantity;
- console.log(numberInput.value)
+          //création de div pour la quantité
+          let dquantity = document.createElement("div");
+          dquantity.classList.add("cart__item__content__settings__quantity");
 
 
- numberInput.addEventListener("change",() => updPriceQuantity(value.id, numberInput.value))
- function updPriceQuantity(id, newValue){
-  console.log(id) 
-  console.log(newValue)
-  //totalQuantity += newValue;
-  const itemProduct = giveFromStorage.find(value => value.id === id);
-  itemProduct.quantity = Number (newValue)
-  console.log(totalQuantity)
- displayQuantity()
- }
- 
+          // le paragraphe de Qté
+          let quantite = document.createElement("p");
+          quantite.innerHTML = "Qté:";
+
+          
+
+          //creation d' input 
+          //let numberInput= document.querySelectorAll(".itemQuantity");
+          let numberInput= document.createElement('input');
+          numberInput.type ="number";
+          numberInput.class = "itemQuantity";
+          numberInput.name = "itemQuantity";
+          numberInput.min = "1";
+          numberInput.max = "100";
+          numberInput.value = value.quantity;
+          console.log(numberInput.value)
+
 
  
- // assign qui copie les valeurs d'un objet qui est énuméarble sur un autre objet cible.
- /*Object.assign(numberInput, {
-  min: 1,
-  max: 100,
- })*/
+          numberInput.addEventListener("change",() => updPriceQuantity(value.id, numberInput.value))
+          function updPriceQuantity(id, newValue){
+                console.log(newValue)
+                console.log(id)
+                //trouver le canapé dans le panier
+              const itemUpd = giveFromStorage.find((item)=> item.id ===id && item.color ===value.color)
+              console.log( giveFromStorage)
+              //modifier la quantité
+              itemUpd.quantity= Number (newValue)
+              console.log(giveFromStorage)
+              //modfier le panier
+              //remettre le panier en storage
+              //raffraichir la page
+              localStorage.setItem("myBasket", JSON.stringify(giveFromStorage));
+              location.reload();
+    
+                       
+          }
+ 
 
 
- //parents & children
- sectionItem.appendChild(article);
- article.appendChild(divImg);
- divImg.appendChild(image);
- article.appendChild(divContent);
- divContent.appendChild(divDescrip);
- divDescrip.appendChild(text);
- divDescrip.appendChild(pcolor);
- divDescrip.appendChild(price);
- divContent.appendChild(setting);
- setting.appendChild(dquantity);
- dquantity.appendChild(quantite);
- dquantity.appendChild(numberInput);
+          //parents & children
+          sectionItem.appendChild(article);
+          article.appendChild(divImg);
+          divImg.appendChild(image);
+          article.appendChild(divContent);
+          divContent.appendChild(divDescrip);
+          divDescrip.appendChild(text);
+          divDescrip.appendChild(pcolor);
+          divDescrip.appendChild(price);
+          divContent.appendChild(setting);
+          setting.appendChild(dquantity);
+          dquantity.appendChild(quantite);
+          dquantity.appendChild(numberInput);
 
 
  //-------DELETE------------------------------
-//création de delete
-deleteSetting(setting)
+          //affichage de delete
+          deleteSetting(setting)
+          let setDelete = document.createElement('div');
+          setDelete.classList.add("cart__item__content__settings__delete")
+          setting.appendChild(setDelete)
+          
+          let pDelete = document.createElement('p');
+          pDelete.classList.add("deleteItem");
+
+          setDelete.appendChild(pDelete)
+          pDelete.textContent= 'Supprimer';
+
+          //button click-on met sur supprimer, on crée une fonction avec les éléments de produit
+          pDelete.addEventListener ("click", ()=> deleteSetting(value.id, value.color))
+          //les éléments recréés: id et couleur
+          function deleteSetting(newId, newColor){
+          console.log(newId);
+          console.log(newColor);
+          //trouver le produit du panier qu'on veut supprimer
+          const itemDelete = giveFromStorage.find((item)=> item.id ===value.id && item.color ===value.color)
+          console.log("itemDelete", itemDelete)
+          //on fait appel à la ressource du localStorage
+          let basket = JSON.parse(localStorage.getItem("myBasket"));
+          //on créé un boucle si à=0, c =au panier
+          for (let a =0, c =basket.length; a< c; a++)
+          if(
+            basket[a].id === value.id &&
+            basket[a].color === value.color
+          ){
+            const num = [a]
+          }
+            
+          
+
+          console.log('bouton supprimer');
+          }
 
 
-function deleteSetting(setting){
- let setDelete = document.createElement('div');
- setDelete.classList.add("cart__item__content__settings__delete")
- setting.appendChild(setDelete)
- 
- let pDelete = document.createElement('p');
-pDelete.classList.add("deleteItem");
-
-setDelete.appendChild(pDelete)
-pDelete.textContent= 'Supprimer';
-}
 
 
+          let messageError = document.getElementById('firstNameErrorMsg')
+          console.log(messageError)
+            
+      }
+
+    );
 
 
-let messageError = document.getElementById('firstNameErrorMsg')
-console.log(messageError)
-  
-});
-}
+  }
 
+/*
 
-/*function renderCartItems (){
+const price = await fetch(`${product.price}`).then(price => price.json());
+console.log(price)
+/*function renderCartItems (price){
   let totalPrice =0,
   totalQuantity =0;
 
@@ -189,8 +210,10 @@ console.log(messageError)
     totalQuantity += item.id
     console.log(item.id)
   })
-totalQte.innerHTML = `Total (${totalQuantity} article): $${totalPrice}`
-}*/
+ 
+totalQte.innerHTML = (`Total (${totalQuantity} article): ${totalPrice}`)
+console.log(totalQte)
+}
 
 
 //récupérer id avec map
