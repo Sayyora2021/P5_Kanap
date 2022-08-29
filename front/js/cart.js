@@ -106,10 +106,11 @@ function displayItem(value) {
       numberInput.min = "1";
       numberInput.max = "100";
       numberInput.value = value.quantity;
-      console.log(numberInput.value)
+      //console.log(numberInput.value)
 
 
-
+      //bouton pour changer la quantité et mettre à jour le prix et total quantité
+      //création de bouton avec "change" pour qu'il modifie le prix et la quantité sur les valeurs id et quantité
       numberInput.addEventListener("change", () => updPriceQuantity(value.id, numberInput.value))
       function updPriceQuantity(id, newValue) {
         console.log(newValue)
@@ -148,7 +149,7 @@ function displayItem(value) {
 
       //-------DELETE------------------------------
       //affichage de delete
-      deleteSetting(setting)
+      //deleteSetting(setting)
       let setDelete = document.createElement('div');
       setDelete.classList.add("cart__item__content__settings__delete");
       setting.appendChild(setDelete);
@@ -158,26 +159,66 @@ function displayItem(value) {
       setDelete.appendChild(pDelete);
       pDelete.textContent = 'Supprimer';
 
-      //button click-on met sur supprimer, on crée une fonction avec les éléments de produit
-      pDelete.addEventListener("click", (e) => deleteSetting(value.id, value.color));
-      console.log(pDelete)
-      //les éléments recréés: id et couleur
+
+      //création du bouton fonction avec les éléments de l'objet
+      pDelete.addEventListener("click", () => deleteSetting(value.id, value.color));
+      console.log(pDelete);
+      //fonction commence ici
       function deleteSetting() {
         console.log(value.id);
         console.log(value.color);
-       giveFromStorage.findIndex((item) => item.id === value.id && item.color === value.color);
-       //giveFromStorage.splice(0)
-      // localStorage.setItem("myBasket", JSON.stringify(giveFromStorage))
+        //trouver l'index de produit du panier qu'on veut supprimer
+        let itemDelete = giveFromStorage.findIndex((item) => item.id === value.id && item.color === value.color);
+        console.log(itemDelete);
+        //pour supprimer 1 objet on utilise splice qui modifie le tableau, on met index et 1 pour supprimer 1 élément
+        giveFromStorage.splice(itemDelete, 1)
+        console.log(giveFromStorage)
+        //on remet le localStorage pour qu'il affiche ce qui reste
+        localStorage.setItem("myBasket", JSON.stringify(giveFromStorage));
+        //on recharge la page d'affichage 
+        location.reload();
+
+      }
+
+      //button click-on met sur supprimer, on crée une fonction avec les éléments de produit
+      /* pDelete.forEach((pDelete) =>{
+         pDelete.addEventListener("click", () => {
+           let basket = JSON.parse (localStorage.getItem("myBasket")) 
+           let itemDelete = giveFromStorage.findIndex((article)=>
+           article.id ===pDelete.id && article.couleur === pDelete.couleur)
+           deleteSetting(value.id, value.color)
+           let newBasket = JSON.parse (localStorage.getItem("myBasket"))
+           newBasket.splice (itemDelete, 1);
+           localStorage.myBasket = JSON.stringify(newBasket)
+         });
+ 
+       })*/
+      /*console.log(pDelete)
+      //les éléments recréés: id et couleur
+      function deleteSetting() {
+        console.log(value);
         
+        
+       let itemDelete= giveFromStorage.findIndex((artcile) => 
+       for (let i =0; i< giveFromStorage.length; i++){
+        article.id === value.id &&  article.color === value.color);
+
+       }
        
-    }
+       console.log("item to delete", value)
+       console.log("item", itemDelete)
+       //giveFromStorage.splice(value, 1)
+       //console.log(giveFromStorage)
+       //
+       //return location.reload();
+       
+    //}
   
-        //trouver le produit du panier qu'on veut supprimer
+       
        // let itemDelete = giveFromStorage.findIndex((item) => item.id === value.id && item.color === value.color);
         //console.log("itemDelete", itemDelete);
         //console.log(giveFromStorage)
-        //pour supprimer 1 objet on utilise splice qui modifie le tableau
-        //giveFromStorage.splice(itemDelete, 1)
+      
         //localStorage.removeItem(itemDelete)
        
         //alert("Article supprimé")
@@ -215,8 +256,8 @@ function displayItem(value) {
 
 
 
-        //console.log('bouton supprimer');
-      
+      //console.log('bouton supprimer');
+
 
 
 
