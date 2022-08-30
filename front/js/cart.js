@@ -186,8 +186,12 @@ const page = document.location.href;
 let form = document.querySelector('.cart__order__form');
 console.log(form.elements);
 
-//bouton de validation avec les conditions
-form.addEventListener('submit', function (e){
+//bouton de validation avec les conditions, après le control regex
+form.addEventListener('submit', inputContact);
+
+function inputContact(e){
+  let contactClient = {};
+  localStorage.contactClient= JSON.stringify(contactClient);
   let myName = document.getElementById('firstName');
   let lastName = document.getElementById('lastName');
   let myAddress = document.getElementById('address');
@@ -198,20 +202,21 @@ console.log(myName);
 
 //les rejex: j'accepte les lettres de a-z, miniscule et maj, les accents, 
 //le - pour les noms composés, de 3 à 20 mots (commence par "/^" et termine par "$/"")
-  const regex = /^[a-zA-Z-\sçéèà]{3,20}$/
-  const regexAddress = /^[a-zA-Z0-9çéèà_,\s'-]{3,150}$/
+  const regex = /^[a-zA-Záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ\s-]{1,31}$/
+  const regexAddress = /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ\s-]{1,60}$/
   const regexEmail = /^[a-zA-Z0-9._-]+[@]{1}[a-zA-Z0-9._-]+[.]{1}[a-z]{2,4}$/
 
   if (!regex.test(myName.value)){
    let nameError = document.getElementById('firstNameErrorMsg');
-   nameError.innerHTML="Veuillez rentrer un prénom valid.";
+   nameError.innerHTML="Veuillez rentrer un prénom valide.";
    console.log(nameError);
   
   }else{
+    document.getElementById('lastNameErrorMsg').textContent="";
     document.getElementById('firstNameErrorMsg').textContent = "";
   }
   if (!regex.test(lastName.value)){
-    document.getElementById('lastNameErrorMsg').textContent="Veuillez rentrer un nom valid.";
+    document.getElementById('lastNameErrorMsg').textContent="Veuillez rentrer un nom valide.";
     
    }else{
      document.getElementById('lastNameErrorMsg').textContent = "";
@@ -233,26 +238,34 @@ console.log(myName);
     
    }else{
      document.getElementById('emailErrorMsg').textContent = "";
-   }
+   };
+   const contact = {
+    firstName: form.myName,
+    lastName: form.lastName,
+    address: form.myAddress,
+    city: form.myCity,
+    email:form.eMail,
+
+  }
+  
+}
+  
+  
+
+   
+    console.log(form.email)
+const orderBtn = document.querySelector("#order");
+console.log(orderBtn);
+orderBtn.addEventListener("submit", (e)=>{
+ // e.preventDefault();
+ if (contact != ""){
+  console.log(contact)
+ }
+  
 })
   
 
-  
 
-
-//les rejex
-
-/*const orderBtn = document.querySelector("#order");
-orderBtn.addEventListener("click", ()=> {
-  const numberOfItems= localStorage.length
-  console.log(numberOfItems);
-  
-  console.log(form.elements)
- if(giveFromStorage.length ===0)alert ("please select items to buy")
-  
-
-
-  //les rejex
   
 
       
