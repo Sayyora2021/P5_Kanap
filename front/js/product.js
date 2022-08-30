@@ -4,7 +4,7 @@ const itemImg = document.querySelector('.item__img');
 
 //const itemContent = document.querySelector('.item__content');
 
-//pour recuperer le produit
+//pour recuperer le produit fetch avec un argument (URL de produit dans ce cas)
 fetch(`http://localhost:3000/api/products/${idProduct}`)
   .then((data) => data.json())
   .then((product) => {

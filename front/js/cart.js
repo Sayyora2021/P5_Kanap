@@ -96,7 +96,7 @@ function displayItem(value) {
       quantite.innerHTML = "Qté:";
 
 
-
+//------------- BTN POUR VALIDER LE PRIX ET LA QUANTITE---------------
       //creation d' input 
       //let numberInput= document.querySelectorAll(".itemQuantity");
       let numberInput = document.createElement('input');
@@ -147,7 +147,7 @@ function displayItem(value) {
       dquantity.appendChild(numberInput);
 
 
-      //-------DELETE------------------------------
+//-------DELETE------------------------------
       //affichage de delete
       //deleteSetting(setting)
       let setDelete = document.createElement('div');
@@ -162,7 +162,7 @@ function displayItem(value) {
 
       //création du bouton fonction avec les éléments de l'objet
       pDelete.addEventListener("click", () => deleteSetting(value.id, value.color));
-      console.log(pDelete);
+      //console.log(pDelete);
       //fonction commence ici
       function deleteSetting() {
         console.log(value.id);
@@ -179,123 +179,122 @@ function displayItem(value) {
         location.reload();
 
       }
+         
+//---------------- FORMULAIRE------------------------------
+//creation de formulaire(voir les elements: name, address etc)
+const page = document.location.href;
+let form = document.querySelector('.cart__order__form');
+console.log(form.elements);
 
-      //button click-on met sur supprimer, on crée une fonction avec les éléments de produit
-      /* pDelete.forEach((pDelete) =>{
-         pDelete.addEventListener("click", () => {
-           let basket = JSON.parse (localStorage.getItem("myBasket")) 
-           let itemDelete = giveFromStorage.findIndex((article)=>
-           article.id ===pDelete.id && article.couleur === pDelete.couleur)
-           deleteSetting(value.id, value.color)
-           let newBasket = JSON.parse (localStorage.getItem("myBasket"))
-           newBasket.splice (itemDelete, 1);
-           localStorage.myBasket = JSON.stringify(newBasket)
-         });
- 
-       })*/
-      /*console.log(pDelete)
-      //les éléments recréés: id et couleur
-      function deleteSetting() {
-        console.log(value);
-        
-        
-       let itemDelete= giveFromStorage.findIndex((artcile) => 
-       for (let i =0; i< giveFromStorage.length; i++){
-        article.id === value.id &&  article.color === value.color);
+//bouton de validation avec les conditions
+form.addEventListener('submit', function (e){
+  let myName = document.getElementById('firstName');
+  let lastName = document.getElementById('lastName');
+  let myAddress = document.getElementById('address');
+  let myCity = document.getElementById('city');
+  let eMail = document.getElementById('email');
+e.preventDefault()
+console.log(myName);
 
-       }
-       
-       console.log("item to delete", value)
-       console.log("item", itemDelete)
-       //giveFromStorage.splice(value, 1)
-       //console.log(giveFromStorage)
-       //
-       //return location.reload();
-       
-    //}
+//les rejex: j'accepte les lettres de a-z, miniscule et maj, les accents, 
+//le - pour les noms composés, de 3 à 20 mots (commence par "/^" et termine par "$/"")
+  const regex = /^[a-zA-Z-\sçéèà]{3,20}$/
+  const regexAddress = /^[a-zA-Z0-9çéèà_,\s'-]{3,150}$/
+  const regexEmail = /^[a-zA-Z0-9._-]+[@]{1}[a-zA-Z0-9._-]+[.]{1}[a-z]{2,4}$/
+
+  if (!regex.test(myName.value)){
+   let nameError = document.getElementById('firstNameErrorMsg');
+   nameError.innerHTML="Veuillez rentrer un prénom valid.";
+   console.log(nameError);
   
-       
-       // let itemDelete = giveFromStorage.findIndex((item) => item.id === value.id && item.color === value.color);
-        //console.log("itemDelete", itemDelete);
-        //console.log(giveFromStorage)
+  }else{
+    document.getElementById('firstNameErrorMsg').textContent = "";
+  }
+  if (!regex.test(lastName.value)){
+    document.getElementById('lastNameErrorMsg').textContent="Veuillez rentrer un nom valid.";
+    
+   }else{
+     document.getElementById('lastNameErrorMsg').textContent = "";
+   }
+   if (!regexAddress.test(myAddress.value)){
+    document.getElementById('addressErrorMsg').textContent="Address invalide.";
+    
+   }else{
+     document.getElementById('addressErrorMsg').textContent = "";
+   }
+   if (!regex.test(myCity.value)){
+    document.getElementById('cityErrorMsg').textContent="Ville invalide.";
+    
+   }else{
+     document.getElementById('cityErrorMsg').textContent = "";
+   }
+   if (!regexEmail.test(eMail.value)){
+    document.getElementById('emailErrorMsg').textContent="Email invalide.";
+    
+   }else{
+     document.getElementById('emailErrorMsg').textContent = "";
+   }
+})
+  
+
+  
+
+
+//les rejex
+
+/*const orderBtn = document.querySelector("#order");
+orderBtn.addEventListener("click", ()=> {
+  const numberOfItems= localStorage.length
+  console.log(numberOfItems);
+  
+  console.log(form.elements)
+ if(giveFromStorage.length ===0)alert ("please select items to buy")
+  
+
+
+  //les rejex
+  
+
       
-        //localStorage.removeItem(itemDelete)
-       
-        //alert("Article supprimé")
-        //localStorage.setItem("myBasket", JSON.stringify(giveFromStorage))
-
-        /*function deleteItem(){
-  const cartDelete = document.querySelectorAll(".cart__item .deleteItem");
-  cartDelete.forEach ((cartDelete)=>{
-    cartDelete.addEventListener("click", ()=>{
-      let basket = JSON.parse (localStorage.getItem("myBasket"))
-      if(
-        basket[d]._id ===cartDelete.dataset.id &&
-        basket[d].color === cartDelete.dataset.color
-      ){
-        const num = [d];
-
-        let newBasket =JSON.parse(localStorage.getItem("myBasket"));
-
-        newBasket.splice(num, 1);
-
-        if(newBasket && newBasket.length ==0){
-
-          document.querySelector("#totalQuantity").innerHTML="0";
-          document.querySelector("#totalPrice").innerHTML="0";
-          document.querySelector("h1").innerHTML=
-          "Vous n'avez pas d'article dans votre panier.";
-        }
-        localStorage.myBasket = JSON.stringify(newBasket);
-        totalProduct();
-        return location.reload();
-      }
-    })
+      /*
+function submitForm (){
+ // e.preventDefault()
+ 
+  
+  fetch(`http://localhost:3000/api/products/order`,{
+   methode: "POST",
+    body: JSON.stringify(body),
+    headers: {
+    "Content-type": "application/json"
+    
+    }
   })
-}*/
+  .then((res)=> res.json())
+  .then((data)=> console.log(data))
 
-
-
-      //console.log('bouton supprimer');
-
-
-
-
-
-      let messageError = document.getElementById('firstNameErrorMsg')
-      console.log(messageError)
+  const body ={
+    contact:{
+      firstName : "kanap",
+      lastName : "kanap",
+      address : "kanap",
+      city : "kanap",
+      email : "kanap",
+    },
+    products : ["107fb5b75607497b96722bda5b504926"]
+  }
+  return body
+})
+}
+   
 
     }
 
-    );
+    );*/
 
 
 }
 
-/*
-
-const price = await fetch(`${product.price}`).then(price => price.json());
-console.log(price)
-/*function renderCartItems (price){
-  let totalPrice =0,
-  totalQuantity =0;
-
-  cart.forEach((item)=> {
-    totalPrice += item.price * item.id;
-    totalQuantity += item.id
-    console.log(item.id)
-  })
- 
-totalQte.innerHTML = (`Total (${totalQuantity} article): ${totalPrice}`)
-console.log(totalQte)
-}
-
-
-//récupérer id avec map
-/*let kanaps = addBasket.map(element =>{
-  return element.id 
-})
-console.log(kanaps);*/
+)}
 
 
 

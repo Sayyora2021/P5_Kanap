@@ -1,12 +1,13 @@
 //variable = section  html #items
 const itemsTag = document.getElementById("items")
 
-// la fonction qui va récupérer les données de l'API
+// pour récupérer les données de l'API, on utilise fetch avec un argument (URL de produit dans ce cas)
 fetch("http://localhost:3000/api/products")
 //récupération des données de lAPI dans response.json
 .then((response) => response.json())
 .then(function(value) {
 
+  //fonction reste à l'écout 
  displayItems(value)
  console.log(value)
  })
@@ -15,6 +16,7 @@ fetch("http://localhost:3000/api/products")
 // appel de la fonction d'affichage
 const displayItems = function (value){
 
+  //un boucle qui permet d'accéder et créer les éléments 
  for (let product of value){
    let a = document.createElement("a");
 a.href = `./product.html?id=${product._id}`

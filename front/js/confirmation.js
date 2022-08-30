@@ -1,162 +1,4 @@
-
-//************version avec dataset************************** */
-
-//récupérer id avec map
-/*let kanaps = addBasket.map(element =>{
-  return element.id 
-})
-console.log(kanaps);*/
 /*
-const page = document.location.href;
-
-// appel de la ressource API
-if(page.match("cart")) {
-  fetch("http://localhost:3000/api/products")
-  .then((response) => response.json())
-  .then((product) => {
-console.log(product)
-
-//appel à la fonction d'affichage le panier
-getProduct (product)
-})
-}else{
-  console.log("sur page confirmation");
-}
-
-
-//fonction qui determine l'affichage des produits du panier
-function getProduct (index){
-  //on récupère le panier
-  const basket = JSON.parse(localStorage.getItem("myBasket"));
-  //si le pnaier est différent de 0 ou supérieur de 0
-  if (basket && basket.length !=0) {
-//valeur de API et du panier grace à l'id du localStorage
-    for(let item of basket){
-      console.log(item)
-      for (let i =0, b = index.length; i <b; i++){
-     //création et ajout des valeurs qui vont servir pour les valeurs dataset
-        if (item._id === index[i]._id){
-          item.name = index[i].name;
-          item.price = index[i].price;
-          item.image = index[i].imageUrl;
-          item.alt = index[i].altTxt;
-          item.description = index[i].description;
-          
-        }
-      }
-    }
-    affiche(basket);
-  }else{
-    //si le panier est vide on crée un H1 informatif
-    document.querySelector('#totalQuantity').innerHTML="0";
-    document.querySelector('#totalPrice').innerHTML="0";
-    document.querySelector('h1').innerHTML="Vous n'avez pas d'article dans votre panier";
-  }
-  //les fonctions de quantité et suppression en attente
-  totalQuantity();
-  deleteItem();
-}
-//fonction pour afficher le panier (tableau)
-function affiche (items){
-  //la zone d'affichage
-  let getBasket = document.querySelector ('#cart__items');
-  getBasket.innerHTML +=items.map((item)=>
-   `<article class="cart__item" data-id="${item._id}" data-color="${item.color}" data-quantité ="${item.quantity}" data-price ="${item.price}">
-  <div class="cart__item__img">
-    <img src="${item.image}" alt="${item.alt}">
-  </div>
-  <div class="cart__item__content">
-    <div class="cart__item__content__description">
-      <h2>${item.name}</h2>
-      <span> couleur :${item.color}</span>
-      <p>data-price ="${item.price}"</p>
-    </div>
-    <div class="cart__item__content__settings">
-      <div class="cart__item__content__settings__quantity">
-        <p>Qté : </p>
-        <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="${item.quanitity}">
-      </div>
-      <div class="cart__item__content__settings__delete">
-        <p class="deleteItem"data-id="${item._id}" data-color ="${item.color}">Supprimer</p>
-      </div>
-    </div>
-  </div>
-</article> `
-  ).join("") //remplace les virgules par vide
-  totalProduct()//attend la modification de quantité
-}
-
-function totalQuantity(){
-  const cart = document.querySelectorAll(".cart__item");
-//on regarde ce qu'il se passe dans quantité de l'article concerné
-cart.forEach((cart)=>{
-  cart.addEventListener("change", (e)=>{
-    //vérification d'information de la valeur du clic sur 
-    let basket = JSON.parse(localStorage.getItem("myBasket"));
-    for (kanap of basket)
-    if(
-      kanap._id ===cart.dataset.id &&
-      cart.dataset.color === kanap.color
-    ){
-      kanap.quantity = e.target.value;
-      localStorage.myBasket=JSON.stringify(basket);
-      //on met à jour le dataset
-      cart.dataset.quantity = e.target.value;
-
-      totalProduct()
-    }
-  })
-})
-
-}
-
-function totalProduct(){
-  let totalQuantity =0;
-
-
-  let totalPrice=0;
-  const cart =document.querySelectorAll(".cart__item");
-
-  cart.forEach((cart)=>{
-    totalQuantity+= JSON.parse(cart.dataset.quantity);
-
-    totalPrice+= cart.dataset.quantity * cart.dataset.price;
-  });
-  document.getElementById("totalQuantity").textContent =totalQuantity;
-
-  document.getElementById("totalPrice").textContent = totalPrice;
-}
-
-function deleteItem(){
-  const cartDelete = document.querySelectorAll(".cart__item .deleteItem");
-  cartDelete.forEach ((cartDelete)=>{
-    cartDelete.addEventListener("click", ()=>{
-      let basket = JSON.parse (localStorage.getItem("myBasket"))
-      if(
-        basket[d]._id ===cartDelete.dataset.id &&
-        basket[d].color === cartDelete.dataset.color
-      ){
-        const num = [d];
-
-        let newBasket =JSON.parse(localStorage.getItem("myBasket"));
-
-        newBasket.splice(num, 1);
-
-        if(newBasket && newBasket.length ==0){
-
-          document.querySelector("#totalQuantity").innerHTML="0";
-          document.querySelector("#totalPrice").innerHTML="0";
-          document.querySelector("h1").innerHTML=
-          "Vous n'avez pas d'article dans votre panier.";
-        }
-        localStorage.myBasket = JSON.stringify(newBasket);
-        totalProduct();
-        return location.reload();
-      }
-    })
-  })
-}
-
 if (page.match("cart")) {
   var contactClient = {};
   localStorage.contactClient = JSON.stringify(contactClient);
@@ -469,3 +311,108 @@ function envoiPaquet() {
   }
 })();
 */ 
+
+//_------------------------------
+
+  
+//---------------- FORMULAIRE------------------------------
+
+//controle de conformité des données du formulaire
+/*
+function checkForm(error) {
+const regex = /^[a-z A-Z çéèà]{3,20}$/
+const regexAddress = /^[a-z A-Z 0-9 çéèà_,'-]{3,150}$/
+const regexEmail = /^[a-zA-Z0-9._-]+[@]{1}[a-zA-Z0-9._-]+[.]{1}[a-z]{2,4}$/
+
+if (!regex.test(document.getElementById("firstName").value)) {
+document.getElementById('firstNameErrorMsg').textContent = "Prénom invalide";
+error.push("Prénom")
+}else{
+document.getElementById('firstNameErrorMsg').textContent = "";
+}
+if (!regex.test(document.getElementById('lastName').value)) {
+document.getElementById('lastNameErrorMsg').textContent = "Nom invalide";
+error.push("Nom")
+}else{
+document.getElementById('lastNameErrorMsg').textContent = "";
+}
+if (!regexAddress.test(document.getElementById('address').value)) {
+document.getElementById('addressErrorMsg').textContent = "Adresse invalide";
+error.push("Adresse")
+}else{
+document.getElementById('addressErrorMsg').textContent = "";
+}
+
+if (!regexAddress.test(document.getElementById('city').value)) {
+document.getElementById('cityErrorMsg').textContent = "Ville invalide";
+error.push("Ville")
+}else{
+document.getElementById('cityErrorMsg').textContent = "";
+}
+if (!regexEmail.test(document.getElementById("email").value)) {
+document.getElementById('emailErrorMsg').textContent = "Email invalide";
+error.push("email")
+}else{
+document.getElementById('emailErrorMsg').textContent = "";
+}
+}
+const orderBtn = document.querySelector("#order")
+console.log(orderBtn)
+orderBtn.addEventListener("click", (e)=> {
+  submitForm(giveFromStorage)
+});
+
+function submitForm(giveFromStorage){
+const form = document.querySelector(".cart__order__form");
+console.log(form);
+const contact = {
+  firstName: form.firstName.value,
+  lastName: form.lastName.value,
+  address: form.address.value,
+  city: form.city.value,
+  email: form.email.value,
+}
+const ids = idInCart (giveFromStorage)
+orderPost (contact, ids)
+}
+//récupération des id pour renvoi dans l'objet products
+function idInCart(cart) {
+const ids = [];
+giveFromStorage.forEach((product) => {
+const id = product.id;
+ids.push(id)
+})
+return ids
+}
+
+//envoi des donnés utilisateur et id du produit
+function orderPost(contact, ids) {
+const dataUser = {
+contact: contact,
+products: ids,
+}
+const error = []
+checkForm(error)
+//conditions de validation du formulaire avant envoi
+if (error != "") {
+console.log(error);
+return alert("Erreur de saisie, veuillez vérifier le formulaire")
+} else {
+console.log("envoi serveur");
+//requête post au serveur
+fetch(`http://localhost:3000/api/products/order`, {
+    method: "POST",
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(dataUser),
+})
+.then((res) => res.json())
+.then((data) => console.log(data))
+.catch(() => {
+    alert("Une erreur est survenue, merci de revenir plus tard.");
+})
+}
+}
+*/
