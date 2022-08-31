@@ -281,22 +281,22 @@ e.preventDefault()
 const orderBtn = document.querySelector("#order");
 console.log(orderBtn);
 orderBtn.addEventListener("submit", (e)=>{
-  inputContact(e)
+  
  // e.preventDefault();
-/* if (contact != ""){
-  console.log(contact)
+ if (paquet != ""){
+  console.log(paquet)
  }
  else{
   fetch("http://localhost:3000/api/products/order",{
     method: "POST,",
-    body: JSON.stringify(contact)
+    body: JSON.stringify(paquet)
   })
   //récupération des données de lAPI dans response.json
   .then((response) => response.json())
   .then((data)=> console.log(data) )
 
- }*/
-  
+ }
+ inputContact(e)
 })
   
 
