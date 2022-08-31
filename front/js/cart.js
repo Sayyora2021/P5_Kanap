@@ -198,10 +198,10 @@ function inputContact(e){
   let myCity = document.getElementById('city');
   let eMail = document.getElementById('email');
 e.preventDefault()
-console.log(myName);
+
 
 //les rejex: j'accepte les lettres de a-z, miniscule et maj, les accents, 
-//le - pour les noms composés, de 3 à 20 mots (commence par "/^" et termine par "$/"")
+//le - pour les noms composés, de 3 à 31 mots (commence par "/^" et termine par "$/"")
   const regex = /^[a-zA-Záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ\s-]{1,31}$/
   const regexAddress = /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ\s-]{1,60}$/
   const regexEmail = /^[a-zA-Z0-9._-]+[@]{1}[a-zA-Z0-9._-]+[.]{1}[a-z]{2,4}$/
@@ -212,8 +212,7 @@ console.log(myName);
    console.log(nameError);
   
   }else{
-    document.getElementById('lastNameErrorMsg').textContent="";
-    document.getElementById('firstNameErrorMsg').textContent = "";
+     document.getElementById('firstNameErrorMsg').textContent = "";
   }
   if (!regex.test(lastName.value)){
     document.getElementById('lastNameErrorMsg').textContent="Veuillez rentrer un nom valide.";
@@ -222,7 +221,7 @@ console.log(myName);
      document.getElementById('lastNameErrorMsg').textContent = "";
    }
    if (!regexAddress.test(myAddress.value)){
-    document.getElementById('addressErrorMsg').textContent="Address invalide.";
+    document.getElementById('addressErrorMsg').textContent="Addresse invalide.";
     
    }else{
      document.getElementById('addressErrorMsg').textContent = "";
@@ -239,70 +238,85 @@ console.log(myName);
    }else{
      document.getElementById('emailErrorMsg').textContent = "";
    };
-   const contact = {
-    firstName: form.myName,
-    lastName: form.lastName,
-    address: form.myAddress,
-    city: form.myCity,
-    email:form.eMail,
+   console.log(firstName.value);
+   console.log(address.value);
 
+//création de request client
+   let paquet ={
+    contact: {
+      firstName: firstName.value,
+      lastName: lastName.value,
+      address: address.value,
+      city: city.value,
+      email: email.value,
+    },
+    
+    products: [giveFromStorage],
+  }
+  idInCart(giveFromStorage);
+  postFetch(paquet)
+  console.log(paquet);
+  
   }
   
-}
-  
-  
+  //boucle pour identifier le produit du panier (id)
+   function idInCart(giveFromStorage) {
+    const ids = [];
+    giveFromStorage.forEach((product)=>{
+      const id = product.id;
+      console.log(id)
+      //ids.push(id)
+    })
+   }
+ 
 
+   function postFetch(paquet, id){
+    const dataClient ={
+      contact: paquet,
+      products: id,
+    }
+    
+    }
    
-    console.log(form.email)
 const orderBtn = document.querySelector("#order");
 console.log(orderBtn);
 orderBtn.addEventListener("submit", (e)=>{
+  inputContact(e)
  // e.preventDefault();
- if (contact != ""){
+/* if (contact != ""){
   console.log(contact)
  }
+ else{
+  fetch("http://localhost:3000/api/products/order",{
+    method: "POST,",
+    body: JSON.stringify(contact)
+  })
+  //récupération des données de lAPI dans response.json
+  .then((response) => response.json())
+  .then((data)=> console.log(data) )
+
+ }*/
   
 })
   
 
-
+/*Expects request to contain:
+  * contact: {
+  *   firstName: string,
+  *   lastName: string,
+  *   address: string,
+  *   city: string,
+  *   email: string
+  * }
+  * products: [string] <-- array of product _id
+  */
+  /*
+  */
   
 
       
-      /*
-function submitForm (){
- // e.preventDefault()
- 
+
   
-  fetch(`http://localhost:3000/api/products/order`,{
-   methode: "POST",
-    body: JSON.stringify(body),
-    headers: {
-    "Content-type": "application/json"
-    
-    }
-  })
-  .then((res)=> res.json())
-  .then((data)=> console.log(data))
-
-  const body ={
-    contact:{
-      firstName : "kanap",
-      lastName : "kanap",
-      address : "kanap",
-      city : "kanap",
-      email : "kanap",
-    },
-    products : ["107fb5b75607497b96722bda5b504926"]
-  }
-  return body
-})
-}
-   
-
-    }
-
-    );*/
 
 
 }
