@@ -179,7 +179,9 @@ function displayItem(value) {
         location.reload();
 
       }
-         
+    } 
+   )
+  }   
 //---------------- FORMULAIRE------------------------------
 //creation de formulaire(voir les elements: name, address etc)
 const page = document.location.href;
@@ -190,6 +192,12 @@ console.log(form.elements);
 form.addEventListener('submit', inputContact);
 
 function inputContact(e){
+  e.preventDefault()
+//si le panier est vide, alert
+  if(giveFromStorage.length===0){
+    alert ("Choisissez un produit svp");
+  }
+
   let contactClient = {};
   localStorage.contactClient= JSON.stringify(contactClient);
   let myName = document.getElementById('firstName');
@@ -197,7 +205,7 @@ function inputContact(e){
   let myAddress = document.getElementById('address');
   let myCity = document.getElementById('city');
   let eMail = document.getElementById('email');
-e.preventDefault()
+
 
 
 //les rejex: j'accepte les lettres de a-z, miniscule et maj, les accents, 
@@ -207,8 +215,7 @@ e.preventDefault()
   const regexEmail = /^[a-zA-Z0-9._-]+[@]{1}[a-zA-Z0-9._-]+[.]{1}[a-z]{2,4}$/
 
   if (!regex.test(myName.value)){
-   let nameError = document.getElementById('firstNameErrorMsg');
-   nameError.innerHTML="Veuillez rentrer un prénom valide.";
+   document.getElementById('firstNameErrorMsg').textContent="Veuillez rentrer un prénom valide.";
    console.log(nameError);
   
   }else{
@@ -254,10 +261,24 @@ e.preventDefault()
     products: [giveFromStorage],
   }
   idInCart(giveFromStorage);
-  postFetch(paquet)
-  console.log(paquet);
   
-  }
+
+  if (paquet != ""){
+    console.log(paquet);
+   }else{
+    fetch("http://localhost:3000/api/products/order",{
+      method: "POST,",
+      paquet: JSON.stringify(contact)
+    })
+    //récupération des données de lAPI dans response.json
+    .then((response) => response.json())
+    .then((data)=> console.log(data) )
+  
+   }
+  
+   }
+  
+  
   
   //boucle pour identifier le produit du panier (id)
    function idInCart(giveFromStorage) {
@@ -270,34 +291,20 @@ e.preventDefault()
    }
  
 
-   function postFetch(paquet, id){
+   /*function postFetch(paquet, id){
     const dataClient ={
       contact: paquet,
       products: id,
     }
     
-    }
+    }*/
    
-const orderBtn = document.querySelector("#order");
-console.log(orderBtn);
-orderBtn.addEventListener("submit", (e)=>{
-  
- // e.preventDefault();
- if (paquet != ""){
+
+ 
+/*if (paquet != ""){
   console.log(paquet)
  }
  else{
-  fetch("http://localhost:3000/api/products/order",{
-    method: "POST,",
-    body: JSON.stringify(paquet)
-  })
-  //récupération des données de lAPI dans response.json
-  .then((response) => response.json())
-  .then((data)=> console.log(data) )
-
- }
- inputContact(e)
-})
   
 
 /*Expects request to contain:
@@ -319,9 +326,8 @@ orderBtn.addEventListener("submit", (e)=>{
   
 
 
-}
 
-)}
+
 
 
 
