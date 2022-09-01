@@ -213,7 +213,8 @@ function inputContact(e){
   const regex = /^[a-zA-Záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ\s-]{1,31}$/
   const regexAddress = /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ\s-]{1,60}$/
   const regexEmail = /^[a-zA-Z0-9._-]+[@]{1}[a-zA-Z0-9._-]+[.]{1}[a-z]{2,4}$/
-
+  
+//si erreur afficher message d'erreur, sinon accepter les données
   if (!regex.test(myName.value)){
    document.getElementById('firstNameErrorMsg').textContent="Veuillez rentrer un prénom valide.";
    console.log(nameError);
@@ -248,7 +249,7 @@ function inputContact(e){
    console.log(firstName.value);
    console.log(address.value);
 
-//création de request client
+//création request d'objet contact et array de produit
    let paquet ={
     contact: {
       firstName: firstName.value,
@@ -258,35 +259,77 @@ function inputContact(e){
       email: email.value,
     },
     
-    products: [giveFromStorage],
+    products: giveFromStorage,
   }
-  idInCart(giveFromStorage);
-  
+ // idInCart(giveFromStorage);
+ console.log(paquet);
+ console.log(giveFromStorage);
 
-  if (paquet != ""){
-    console.log(paquet);
-   }else{
-    fetch("http://localhost:3000/api/products/order",{
-      method: "POST,",
-      paquet: JSON.stringify(contact)
-    })
-    //récupération des données de lAPI dans response.json
-    .then((response) => response.json())
-    .then((data)=> console.log(data) )
+ // fetch POST request pour poster et transformer objet en id
+//contactClient.push(paquet);
+fetch("http://localhost:3000/api/products/order",{
+  method: "POST",
+  body: JSON.stringify(paquet),
   
-   }
+})
+    .then((res) => res.json())
+    .then((data) => {
+      let orderId = data.orderId;
+      //window.location.assign("confirmation.html?id=" + orderId)
+      
+    });
   
-   }
+  //console.log(response) 
+
+
+ 
+ /* response.json())
+      .then((data)=> console.log(data) )
+    
+
+
+ console.log(promise);
+ console.log("promise");*/
+ //paquet.keys(empty).length ===0 
+/*if (contactClient.length ===0){
+  console.log(contactClient.length);
+  return alert ("Erreur de saisie, veuillez vérifier le formulaire")
+}else{
+  contactClient.push(paquet);
+  fetch("http://localhost:3000/api/products/order",{
+        method: "POST,",
+        headers :{
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        }, body: JSON.stringify(userShop)
+      })
+      //récupération des données de lAPI dans response.json
+      .then((response) => response.json())
+      .then((data)=> console.log(data) )
+    }*/
+  }
+
   
+   
+ 
+    
+    
+    /*else{
+      console.log("envoi serveur");
+      
+       
+  }*/
+   
+    
   
-  
+  /*
   //boucle pour identifier le produit du panier (id)
    function idInCart(giveFromStorage) {
     const ids = [];
     giveFromStorage.forEach((product)=>{
       const id = product.id;
       console.log(id)
-      //ids.push(id)
+      
     })
    }
  
