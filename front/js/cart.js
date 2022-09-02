@@ -130,8 +130,6 @@ function displayItem(value) {
 
       }
 
-
-
       //parents & children
       sectionItem.appendChild(article);
       article.appendChild(divImg);
@@ -256,7 +254,7 @@ function controlForm(error) {
   };
 
   console.log(address.value);
-}
+};
 
 
 //boucle pour identifier le id du panier 
@@ -276,17 +274,18 @@ function postFetch(contact, ids) {
   const dataUser = {
     contact: contact,
     products: ids,
+  }
 
-  };
-  //création d'un tableau ou on met erreur si il y a
+  //création d'un tableau qui affiche erreur si il y a
   const error = [] //error de fonction devient un tableau
   controlForm(error);
-
+  // si erreur est différent de formulaire, message alert
   if (error != "") {
     console.log(error)
     alert("Merci de vérifier le formulaire");
   }
   else {
+   
     fetch(`http://localhost:3000/api/products/order`, {
       method: "POST",
       headers: {
@@ -298,10 +297,12 @@ function postFetch(contact, ids) {
     )
       //la réponse doit renvoyer un oredrId
       .then((response) => response.json())
-      .then((data) => {
-        let orderId = data.orderId
+      .then((promise) => {
+        let orderId = promise
+        console.log(orderId)
         //adresse de la page + orderId
-        window.location.assign("confirmation.html?id=" + orderId)
+       // window.location.assign("confirmation.html?id=" + orderId)
+        location.href = "confirmation.html" + "?orderId=" + orderId
       })
 
   }
@@ -313,47 +314,6 @@ function postFetch(contact, ids) {
 
 
 
-
-/*else{
-  console.log("envoi serveur");
-  
-   
-}*/
-
-
-
-
-
-
-
-/*function postFetch(paquet, id){
- const dataClient ={
-   contact: paquet,
-   products: id,
- }
- 
- }*/
-
-
-
-/*if (paquet != ""){
-  console.log(paquet)
- }
- else{
-  
-
-/*Expects request to contain:
-  * contact: {
-  *   firstName: string,
-  *   lastName: string,
-  *   address: string,
-  *   city: string,
-  *   email: string
-  * }
-  * products: [string] <-- array of product _id
-  */
-/*
-*/
 
 
 
