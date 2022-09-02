@@ -96,7 +96,7 @@ function displayItem(value) {
       quantite.innerHTML = "Qté:";
 
 
-//------------- BTN POUR VALIDER LE PRIX ET LA QUANTITE---------------
+      //------------- BTN POUR VALIDER LE PRIX ET LA QUANTITE---------------
       //creation d' input 
       //let numberInput= document.querySelectorAll(".itemQuantity");
       let numberInput = document.createElement('input');
@@ -147,7 +147,7 @@ function displayItem(value) {
       dquantity.appendChild(numberInput);
 
 
-//-------DELETE------------------------------
+      //-------DELETE------------------------------
       //affichage de delete
       //deleteSetting(setting)
       let setDelete = document.createElement('div');
@@ -179,9 +179,9 @@ function displayItem(value) {
         location.reload();
 
       }
-    } 
-   )
-  }   
+    }
+    )
+}
 //---------------- FORMULAIRE------------------------------
 //creation de formulaire(voir les elements: name, address etc)
 const page = document.location.href;
@@ -191,142 +191,151 @@ console.log(form.elements);
 //bouton de validation avec les conditions, après le control regex
 form.addEventListener('submit', inputContact);
 
-function inputContact(e){
+function inputContact(e) {
   e.preventDefault()
-//si le panier est vide, alert
-  if(giveFromStorage.length===0){
-    alert ("Choisissez un produit svp");
+  //si le panier est vide, alert
+  if (giveFromStorage.length === 0) {
+    alert("Choisissez un produit svp");
   }
+  const ids = idInCart(giveFromStorage);
 
-  let contactClient = {};
-  localStorage.contactClient= JSON.stringify(contactClient);
-  let myName = document.getElementById('firstName');
-  let lastName = document.getElementById('lastName');
-  let myAddress = document.getElementById('address');
-  let myCity = document.getElementById('city');
-  let eMail = document.getElementById('email');
+  //création request d'objet contact et array de produit
+  // let paquet ={
+  const contact = {
+    firstName: firstName.value,
+    lastName: lastName.value,
+    address: address.value,
+    city: city.value,
+    email: email.value,
+
+  };
+  console.log(contact);
+  postFetch(contact, ids)
+};
 
 
 
-//les rejex: j'accepte les lettres de a-z, miniscule et maj, les accents, 
-//le - pour les noms composés, de 3 à 31 mots (commence par "/^" et termine par "$/"")
+function controlForm(error) {
+  //les rejex: j'accepte les lettres de a-z, miniscule et maj, les accents, 
+  //le - pour les noms composés, de 3 à 31 mots (commence par "/^" et termine par "$/"")
   const regex = /^[a-zA-Záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ\s-]{1,31}$/
   const regexAddress = /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ\s-]{1,60}$/
   const regexEmail = /^[a-zA-Z0-9._-]+[@]{1}[a-zA-Z0-9._-]+[.]{1}[a-z]{2,4}$/
-  
-//si erreur afficher message d'erreur, sinon accepter les données
-  if (!regex.test(myName.value)){
-   document.getElementById('firstNameErrorMsg').textContent="Veuillez rentrer un prénom valide.";
-   console.log(nameError);
-  
-  }else{
-     document.getElementById('firstNameErrorMsg').textContent = "";
-  }
-  if (!regex.test(lastName.value)){
-    document.getElementById('lastNameErrorMsg').textContent="Veuillez rentrer un nom valide.";
-    
-   }else{
-     document.getElementById('lastNameErrorMsg').textContent = "";
-   }
-   if (!regexAddress.test(myAddress.value)){
-    document.getElementById('addressErrorMsg').textContent="Addresse invalide.";
-    
-   }else{
-     document.getElementById('addressErrorMsg').textContent = "";
-   }
-   if (!regex.test(myCity.value)){
-    document.getElementById('cityErrorMsg').textContent="Ville invalide.";
-    
-   }else{
-     document.getElementById('cityErrorMsg').textContent = "";
-   }
-   if (!regexEmail.test(eMail.value)){
-    document.getElementById('emailErrorMsg').textContent="Email invalide.";
-    
-   }else{
-     document.getElementById('emailErrorMsg').textContent = "";
-   };
-   console.log(firstName.value);
-   console.log(address.value);
 
-   const ids = idInCart(giveFromStorage);
-   
-//création request d'objet contact et array de produit
-   let paquet ={
-    contact: {
-      firstName: firstName.value,
-      lastName: lastName.value,
-      address: address.value,
-      city: city.value,
-      email: email.value,
-    },
-    
-    products: ids,
+
+  //si erreur afficher message d'erreur, sinon accepter les données
+  if (!regex.test(document.getElementById('firstName').value)) {
+    document.getElementById('firstNameErrorMsg').textContent = "Veuillez rentrer un prénom valide.";
+    error.push("Prénom") //error sera un tableau qui affiche un erreur sur prénom s'il y a
+  } else {
+    document.getElementById('firstNameErrorMsg').textContent = "";
   }
- 
- console.log(paquet);
- postFetch (contact, ids)
- //console.log(ids); 
+  if (!regex.test(document.getElementById('lastName').value)) {
+    document.getElementById('lastNameErrorMsg').textContent = "Veuillez rentrer un nom valide.";
+    error.push("Nom")
+  } else {
+    document.getElementById('lastNameErrorMsg').textContent = "";
+  }
+  if (!regexAddress.test(document.getElementById('address').value)) {
+    document.getElementById('addressErrorMsg').textContent = "Addresse invalide.";
+    error.push("Adresse")
+  } else {
+    document.getElementById('addressErrorMsg').textContent = "";
+  }
+  if (!regex.test(document.getElementById('city').value)) {
+    document.getElementById('cityErrorMsg').textContent = "Ville invalide.";
+    error.push("Ville")
+  } else {
+    document.getElementById('cityErrorMsg').textContent = "";
+  }
+  if (!regexEmail.test(document.getElementById('email').value)) {
+    document.getElementById('emailErrorMsg').textContent = "Email invalide.";
+    error.push("email")
+  } else {
+    document.getElementById('emailErrorMsg').textContent = "";
   };
 
- //boucle pour identifier le produit du panier (id)
- function idInCart(giveFromStorage) {
+  console.log(address.value);
+}
+
+
+//boucle pour identifier le id du panier 
+function idInCart(giveFromStorage) {
   const ids = [];
-  giveFromStorage.forEach((product)=>{
+  giveFromStorage.forEach((product) => {
     const id = product.id;
     ids.push(id);
     //console.log(ids);
   })
   return ids
- };
 
- // fonction fetch POST pour transformer un objet en id
- function postFetch (contact, ids){
-  const dataUser ={
+};
+
+// fonction fetch POST pour transformer un objet en id
+function postFetch(contact, ids) {
+  const dataUser = {
     contact: contact,
-    products : ids,
+    products: ids,
+
+  };
+  //création d'un tableau ou on met erreur si il y a
+  const error = [] //error de fonction devient un tableau
+  controlForm(error);
+
+  if (error != "") {
+    console.log(error)
+    alert("Merci de vérifier le formulaire");
   }
- }
-  
-fetch(`http://localhost:3000/api/products/order`,{
-  method: "POST",
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type':'application/json',
-  },
-  body: JSON.stringify(paquet),
-})
-    .then((response) => response.json())
-    .then((data) => sendData(data))
-    .catch(()=>{
-      alert("Uneerreur est survenue, merci de revenir plus tard");
-    })
-   
-  
-    
-    
-    /*else{
-      console.log("envoi serveur");
-      
-       
-  }*/
-   
-    
-  
-  
- 
- 
-
-   /*function postFetch(paquet, id){
-    const dataClient ={
-      contact: paquet,
-      products: id,
+  else {
+    fetch(`http://localhost:3000/api/products/order`, {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(dataUser),
     }
-    
-    }*/
-   
+    )
+      //la réponse doit renvoyer un oredrId
+      .then((response) => response.json())
+      .then((data) => {
+        let orderId = data.orderId
+        //adresse de la page + orderId
+        window.location.assign("confirmation.html?id=" + orderId)
+      })
 
+  }
+
+};
+
+
+
+
+
+
+
+/*else{
+  console.log("envoi serveur");
+  
+   
+}*/
+
+
+
+
+
+
+
+/*function postFetch(paquet, id){
+ const dataClient ={
+   contact: paquet,
+   products: id,
+ }
  
+ }*/
+
+
+
 /*if (paquet != ""){
   console.log(paquet)
  }
@@ -343,13 +352,13 @@ fetch(`http://localhost:3000/api/products/order`,{
   * }
   * products: [string] <-- array of product _id
   */
-  /*
-  */
-  
+/*
+*/
 
-      
 
-  
+
+
+
 
 
 
