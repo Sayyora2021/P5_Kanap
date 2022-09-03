@@ -213,7 +213,7 @@ function inputContact(e) {
 
 
 
-function controlForm(error) {
+function controlForm(valide) {
   //les rejex: j'accepte les lettres de a-z, miniscule et maj, les accents, 
   //le - pour les noms composés, de 3 à 31 mots (commence par "/^" et termine par "$/"")
   const regex = /^[a-zA-Záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ\s-]{1,31}$/
@@ -224,31 +224,31 @@ function controlForm(error) {
   //si erreur afficher message d'erreur, sinon accepter les données
   if (!regex.test(document.getElementById('firstName').value)) {
     document.getElementById('firstNameErrorMsg').textContent = "Veuillez rentrer un prénom valide.";
-    error.push("Prénom") //error sera un tableau qui affiche un erreur sur prénom s'il y a
+    valide.push("Prénom") //si tout est bien rempli on push prénom
   } else {
     document.getElementById('firstNameErrorMsg').textContent = "";
   }
   if (!regex.test(document.getElementById('lastName').value)) {
     document.getElementById('lastNameErrorMsg').textContent = "Veuillez rentrer un nom valide.";
-    error.push("Nom")
+    valide.push("Nom")
   } else {
     document.getElementById('lastNameErrorMsg').textContent = "";
   }
   if (!regexAddress.test(document.getElementById('address').value)) {
     document.getElementById('addressErrorMsg').textContent = "Addresse invalide.";
-    error.push("Adresse")
+    valide.push("Adresse")
   } else {
     document.getElementById('addressErrorMsg').textContent = "";
   }
   if (!regex.test(document.getElementById('city').value)) {
     document.getElementById('cityErrorMsg').textContent = "Ville invalide.";
-    error.push("Ville")
+    valide.push("Ville")
   } else {
     document.getElementById('cityErrorMsg').textContent = "";
   }
   if (!regexEmail.test(document.getElementById('email').value)) {
     document.getElementById('emailErrorMsg').textContent = "Email invalide.";
-    error.push("email")
+    valide.push("email")
   } else {
     document.getElementById('emailErrorMsg').textContent = "";
   };
@@ -258,7 +258,7 @@ function controlForm(error) {
 
 
 //boucle pour identifier le id du panier 
-function idInCart(giveFromStorage) {
+function idInCart() {
   const ids = [];
   giveFromStorage.forEach((product) => {
     const id = product.id;
@@ -266,26 +266,25 @@ function idInCart(giveFromStorage) {
     //console.log(ids);
   })
   return ids
-
 };
 
 // fonction fetch POST pour transformer un objet en id
 function postFetch(contact, ids) {
   const dataUser = {
     contact: contact,
-    products: ids,
+    products: idInCart()
   }
+  console.log(dataUser);
 
   //création d'un tableau qui affiche erreur si il y a
-  const error = [] //error de fonction devient un tableau
-  controlForm(error);
-  // si erreur est différent de formulaire, message alert
-  if (error != "") {
-    console.log(error)
+  const valide = [] //valide de fonction devient un tableau
+  controlForm(valide);
+  // si valide est différent de formulaire, message alert
+  if (valide != "") {
+    console.log(valide)
     alert("Merci de vérifier le formulaire");
   }
-  else {
-   
+  else {   
     fetch(`http://localhost:3000/api/products/order`, {
       method: "POST",
       headers: {
@@ -298,11 +297,12 @@ function postFetch(contact, ids) {
       //la réponse doit renvoyer un oredrId
       .then((response) => response.json())
       .then((promise) => {
-        let orderId = promise
-        console.log(orderId)
+        console.log(promise);
+
         //adresse de la page + orderId
        // window.location.assign("confirmation.html?id=" + orderId)
-        location.href = "confirmation.html" + "?orderId=" + orderId
+        //location.href = "confirmation.html" + "?orderId=" + orderId
+        document.location.href = "./confirmation.html?orderId=" + promise.orderId
       })
 
   }
