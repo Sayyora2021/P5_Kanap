@@ -2,7 +2,6 @@
 const idProduct = new URLSearchParams(window.location.search).get('id');
 const itemImg = document.querySelector('.item__img');
 
-//const itemContent = document.querySelector('.item__content');
 
 //pour recuperer le produit fetch avec un argument (URL de produit dans ce cas)
 fetch(`http://localhost:3000/api/products/${idProduct}`)
@@ -10,8 +9,7 @@ fetch(`http://localhost:3000/api/products/${idProduct}`)
   .then((product) => {
 
 
-    //fonction qui a img,title,price, description, loop-color
-    //function display (product){
+    //fonction qui qui affiche les valeurs de l'objet
     const imageKanap = document.createElement('img');
     imageKanap.src = product.imageUrl;
     imageKanap.alt = product.altTxt;
@@ -64,7 +62,7 @@ function buttonClick(kanap) {
     color: couleur,
     quantity: Number(kanapQuantity),
   }
-  /*localStorage.setItem("kanape", JSON.stringify("myBasket"));*/
+  
   //window.location.href = "cart.html"
   console.log(kanape);
 
@@ -107,7 +105,7 @@ function buttonClick(kanap) {
 };
 
 
-// //Conditions de la page product
+// //Conditions de la page product avec quantité 1-100 pour même id/couleur
   /*  if (kanape.color != "") {
       let myBasket = JSON.parse(localStorage.getItem("myBasket")) //on récupère le panier
 

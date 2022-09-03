@@ -1,4 +1,4 @@
-//variable = section  html #items
+//création de variable = section  html #items
 const itemsTag = document.getElementById("items")
 
 // pour récupérer les données de l'API, on utilise fetch avec un argument (URL de produit dans ce cas)
