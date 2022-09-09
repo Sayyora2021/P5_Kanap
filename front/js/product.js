@@ -72,7 +72,7 @@ function buttonClick() {
       //si le panier n'existe pas, on le créé, on push objet et on le met dans storage
       if (myBasket == null) {
         let myBasket = [];
-        myBasket.push(kanape);
+        //myBasket.push(kanape);
         localStorage.setItem("myBasket", JSON.stringify(myBasket));
       }
       //on cherche dans le panier même id et même couleur
@@ -83,7 +83,14 @@ function buttonClick() {
       if (findProduct) {
         //on montre la quantité = quantité.value+ panier.quantité                                          
         let newQuantity = Number(kanapQuantity) + findProduct.quantity;
-        findProduct.quantity = newQuantity;
+
+        if(newQuantity >0 && newQuantity <=100){
+          findProduct.quantity = newQuantity;
+          localStorage.setItem("myBasket", JSON.stringify(myBasket));
+        }else {
+          alert ("Choisissez une quantité entre 1-100")
+        }
+        
       }
       else {
         // sinon, ajout du canapé au panier et on met le panier dans storage
