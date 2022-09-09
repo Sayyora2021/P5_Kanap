@@ -1,5 +1,5 @@
 ///récupérer le panier sélectionné depuis localStorage
-const giveFromStorage = JSON.parse(localStorage.getItem("myBasketTest"));
+const giveFromStorage = JSON.parse(localStorage.getItem("kanape"));
 console.log(giveFromStorage);
 if(giveFromStorage ===null){
   alert ("Merci de choisir un produit")
@@ -126,7 +126,7 @@ if(giveFromStorage ===null){
           //modfier le panier
           //remettre le panier en storage
           //raffraichir la page
-          localStorage.setItem("myBasketTest", JSON.stringify(giveFromStorage));
+          localStorage.setItem("kanape", JSON.stringify(giveFromStorage));
           location.reload();
         };
   
@@ -171,7 +171,7 @@ if(giveFromStorage ===null){
           giveFromStorage.splice(itemDelete, 1)
           console.log(giveFromStorage)
           //on remet le localStorage pour qu'il affiche ce qui reste
-          localStorage.setItem("myBasketTest", JSON.stringify(giveFromStorage));
+          localStorage.setItem("kanape", JSON.stringify(giveFromStorage));
           //on recharge la page d'affichage 
           location.reload();
   
