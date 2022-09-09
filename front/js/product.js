@@ -7,34 +7,32 @@ const itemImg = document.querySelector('.item__img');
 fetch(`http://localhost:3000/api/products/${idProduct}`)
   .then((data) => data.json())
   .then((product) => {
+      //fonction qui qui affiche les valeurs de l'objet
+      const imageKanap = document.createElement('img');
+      imageKanap.src = product.imageUrl;
+      imageKanap.alt = product.altTxt;
+      itemImg.appendChild(imageKanap);
 
+      let kanapName = document.getElementById('title');
+      kanapName.textContent = (`${product.name}`);
 
-    //fonction qui qui affiche les valeurs de l'objet
-    const imageKanap = document.createElement('img');
-    imageKanap.src = product.imageUrl;
-    imageKanap.alt = product.altTxt;
-    itemImg.appendChild(imageKanap);
+      let kanapPrice = document.getElementById('price');
+      kanapPrice.textContent = (`${product.price}`);
 
-    let kanapName = document.getElementById('title');
-    kanapName.textContent = (`${product.name}`);
+      let kanapDescription = document.getElementById('description');
+      kanapDescription.textContent = (`${product.description}`);
 
-    let kanapPrice = document.getElementById('price');
-    kanapPrice.textContent = (`${product.price}`);
+      //creation de boucle couleur des options et value existants dans html pour couleur 
+      const dropdownColors = product.colors
+      console.log(dropdownColors);
 
-    let kanapDescription = document.getElementById('description');
-    kanapDescription.textContent = (`${product.description}`);
-
-    //creation de boucle couleur des options et value existants dans html pour couleur 
-    const dropdownColors = product.colors
-    console.log(dropdownColors);
-
-    for (let color of dropdownColors) {
-      let dropdown = document.createElement('option');
-      dropdown.value = `${color}`;
-      dropdown.textContent = `${color}`;
-      let select = document.getElementById('colors')
-      select.appendChild(dropdown);
-    }
+      for (let color of dropdownColors) {
+        let dropdown = document.createElement('option');
+        dropdown.value = `${color}`;
+        dropdown.textContent = `${color}`;
+        let select = document.getElementById('colors')
+        select.appendChild(dropdown);
+      }
   });
 
 //creation de bouton
@@ -44,105 +42,169 @@ const button = document.getElementById('addToCart')
 //creation de fonction button
 button.addEventListener("click", buttonClick)
 
-function buttonClick(kanap) {
-
-  console.log("click sur le");
+function buttonClick() {
+  //console.log("click sur le bouton ajouter au panier");
 
   const color = document.getElementById('colors');
   let couleur = color.value;
-  console.log(couleur);
+  //console.log(couleur);
 
   const quantity = document.getElementById('quantity');
   let kanapQuantity = quantity.value;
-  console.log(kanapQuantity);
-  console.log(idProduct);
+  //console.log(kanapQuantity);
+  //console.log(idProduct);
 
   let kanape = {
     id: idProduct,
     color: couleur,
     quantity: Number(kanapQuantity),
-  }
+  };
   
-  //window.location.href = "cart.html"
-  console.log(kanape);
+ //window.location.href = "cart.html"
 
+  //Conditions LA BONNE VERSION
+  
+/*********La bonne version************* */
+// si la quantité est bonne
+if (Number(kanapQuantity) > 0 && Number(kanapQuantity) <= 100) { 
+  alert(`L'ajout de quantité ${quantity.value} a été pris en compte`);
+    //si la couleur est choisie, on le met dans storage
 
-  //Conditions
-  //si la couleur est choisie
-     if (kanape.color != "") {
+    if (kanape.color != "") { 
+        let myBasket = JSON.parse(localStorage.getItem("myBasketTest"));
+       console.log(myBasket);
+        //si le panier n'existe pas, on le créé et on le met dans storage
+        if (myBasket==null) { 
+            myBasket = []; 
+            localStorage.setItem("myBasketTest", JSON.stringify(myBasket));  
+        } 
+            //on cherche même id et même couleur
+            const findProduct = myBasket.find((el) => el.id === idProduct && el.color === kanape.color);
+            console.log(findProduct);
+            //si ce produit existe 
+            if (findProduct) {   
+              //on montre la quantité = quantité.value+ panier.quantité                                          
+              let newQuantity = Number(kanapQuantity) + findProduct.quantity;   
+              findProduct.quantity = newQuantity; 
+              //localStorage.setItem("myBasketTest", JSON.stringify(myBasket));
+              }
+              else {  
+              // sinon, ajout du canapé au panier et on met le panier dans storage
+              myBasket.push(kanape); 
+              localStorage.setItem("myBasketTest", JSON.stringify(myBasket)); 
+            }
+      } 
+    else {
+      alert("merci de choisir une couleur");
+    }
+} 
+else {
+    alert('merci de choisir une quantité entre 1-100');
+}
+};
+
+/*****************version 2************ *//*
+if (kanapQuantity > 0 && kanapQuantity <= 100) { 
+ // myBasket.push(kanape); // ajout du canapé au panier
+  //localStorage.setItem("myBasket", JSON.stringify(myBasket)); 
+}
+if (kanape.color != "") {
+      alert('Couleur est selectionnée');
       let myBasket = JSON.parse(localStorage.getItem("myBasket")) //on récupère le panier
 
       // Si même produit/couleur est déjà dans le localStorage
-      const findProduct = myBasket.find((el) => el.id === idProduct && el.color === kanape.color)//chercher si même id et même couleur
+      const findProduct = myBasket.find((el) => el.id === idProduct && el.color === kanape.color);
 
+if (myBasket!==null) { 
+              //si le panier n'existe pas
+
+              myBasket = []; // création du panier
+             // myBasket.push(kanape); // ajout du canapé au panier
+              localStorage.setItem("myBasket", JSON.stringify(myBasket)); //on met le panier dans storage        
+          } 
       if (findProduct) {       
-        //si ce produit existe ...  
-        console.log('le produit existe..');     
-        let newQuantity = Number(kanapQuantity) + Number(findProduct.quantity); //on montre la quantité
-
+        //si ce produit existe, on montre la quantité.  
+        let newQuantity = Number(kanapQuantity) + Number(findProduct.quantity); 
+        //on calcul la quantité pour qu'elle soit égal à la quantité de canapé (1-100)
         const updatedResult = myBasket.map((el) => {
           if (el && el.id === idProduct && el.color === kanape.color) {              
               el.quantity = newQuantity;
           }
         });
-        //si la quantité est entre 1-100
+        
+        //si la quantité est entre 1-100, on met le panier dans storage
         if (newQuantity > 0 && newQuantity <= 100) { 
-            localStorage.setItem("myBasket", JSON.stringify(updatedResult)); //on met le panier dans storage
+          myBasket.push(kanape);
+            localStorage.setItem("myBasket", JSON.stringify(updatedResult)); 
         }
-        else {
-          //sinon, message
-          alert ('Vous avez déjà choisi ce canapé');
+       else {
+        
+          //sinon, message   TRAVAILLER ICI
+          //alert(`Vous avez déjà choisi ${quantity.value} produits de ce type`)
+          alert ('Vous avez déjà choisi ce type de produit, merci de selcetionner une quantité entre 1-100');
         }     
-      }
-      else {  
-        // si ce produit n'existe pas ...
+    
+       
+        // si ce produit n'existe pas, on met le panier dans storage ...
         if (kanapQuantity > 0 && kanapQuantity <= 100) { 
           myBasket.push(kanape); // ajout du canapé au panier
-          localStorage.setItem("myBasket", JSON.stringify(myBasket)); //on met le panier dans storage
+          localStorage.setItem("myBasket", JSON.stringify(myBasket)); 
         }
         else {
-          alert ('La quantité doit être entre 1 et 100');
+          alert ('Veuillez selectionner une quantité entre 1 et 100');
         }          
-      }
+      
+  }else {
+    alert("merci de choisir une couleur");
   }
 
   console.table(localStorage.getItem("myBasket"))
 };
 
+//****************Version 2*****/
 
-/*if (Number(kanapQuantity) > 0 && Number(kanapQuantity) <= 100) { // si la quantité est entre 1 et 100
-    alert("quantity ok");
+// si la quantité est entre 1 et 100
+ /*
+ if (Number(kanapQuantity) > 0 && Number(kanapQuantity) <= 100) { 
+  alert(`L'ajout de quantité ${quantity.value} a été pris en compte`);
+    //si la couleur est choisie
+    if (kanape.color != "") { 
+        //alert('couleur ok');
+        let myBasket = JSON.parse(localStorage.getItem("myBasketTest"));//on récupère le panier
+       // console.log('myBasket ', myBasket);
 
-    if (kanape.color != "") { //si la couleur est choisie
-      alert('couleur ok');
-      let myBasket = JSON.parse(localStorage.getItem("myBasket"))//on récupère le panier
+        if (myBasket==null) { 
+            //si le panier n'existe pas, on le créé
+            myBasket = []; 
+            //myBasket.push(kanape); // ajout du canapé au panier
+            localStorage.setItem("myBasketTest", JSON.stringify(myBasket)); //on met le panier dans storage 
 
-      if (myBasket == null) { //si le panier n'existe pas
-        myBasket = []; // création du panier
-        //myBasket.push(kanape); // ajout du canapé au panier
-        localStorage.setItem("myBasket", JSON.stringify(myBasket)); //on met le panier dans storage
-
-
-        //si même id et même couleur, montrer la quantité
-      } const findProduct = myBasket.find((el) => el.id === idProduct && el.color === kanape.color)//chercher si même id et même couleur
-      if (findProduct) {                                               //si ce produit existe 
-        let newQuantity = Number(kanapQuantity) + findProduct.quantity;   //on créé la quantité = quantité.value+ panier.quantité
-        findProduct.quantity = newQuantity;         //panier.quantité est égale à newQuantité
-        console.log(findProduct)
-        alert(`L'ajoute de quantité ${quantity.value} a été pris en compte`)
-        localStorage.setItem("myBasket", JSON.stringify(myBasket))// on met le panier dans storage
-      }
-      else {  // sinon 
-        myBasket.push(kanape); // ajout du canapé au panier
-        localStorage.setItem("myBasket", JSON.stringify(myBasket)); //on met le panier dans storage
-
-      }
-    } else {
+        } 
+            //on cherche même id et même couleur
+            console.log(myBasket)
+            const findProduct = myBasket.find((el) => el.id === idProduct && el.color === kanape.color);
+            //si ce produit existe 
+            if (findProduct) {   
+              //on montre la quantité = quantité.value+ panier.quantité                                          
+              let newQuantity = Number(kanapQuantity) + findProduct.quantity;   
+              findProduct.quantity = newQuantity; 
+              console.log(newQuantity)
+              // on met le panier dans storage      
+              //localStorage.setItem("kanape", JSON.stringify(myBasket))
+            }
+            else {  
+              // sinon 
+              myBasket.push(kanape); // ajout du canapé au panier
+              localStorage.setItem("myBasketTest", JSON.stringify(myBasket)); //on met le panier dans storage
+            }
+      } 
+    else {
       alert("merci de choisir une couleur");
     }
-  } else {
+} 
+else {
     alert('merci de choisir une quantité entre 1-100');
-  }
+}
+
 
 };*/
-
