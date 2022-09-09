@@ -1,5 +1,5 @@
 //création de variable = section  html #items
-const itemsTag = document.getElementById("items")
+const itemsTag = document.getElementById("items");
 
 // pour récupérer les données de l'API, on utilise fetch avec un argument (URL de produit dans ce cas)
 fetch("http://localhost:3000/api/products")
@@ -44,11 +44,5 @@ const displayItems = function (value) {
     article.appendChild(titre);
     article.appendChild(p);
   }
-}
-//innerHTML rècupère la section items avec les enfants
-/* items.innerHTML +=
- (`<a href="./product.html?id=${product._id}">
- <article> <img src="${product.imageUrl}" alt="$product.name">
- <h3 class='productName'>${product.name}</h3>
- <p class="productDescription">${product.description}</p>
-</article></a>`);*/
+};
+
