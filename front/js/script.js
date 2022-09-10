@@ -9,7 +9,7 @@ fetch("http://localhost:3000/api/products")
 
     //fonction reste à l'écout 
     displayItems(value)
-    console.log(value)
+    
   })
 
 
@@ -21,7 +21,7 @@ const displayItems = function (value) {
     let a = document.createElement("a");
     a.href = `./product.html?id=${product._id}`
     itemsTag.appendChild(a);
-    console.log(a)
+    
     //creation des elements existants
     article = document.createElement("article");
     items.appendChild(article);

@@ -187,7 +187,7 @@ if (giveFromStorage === null) {
         email: email.value,
 
       };
-      console.log(contact);
+      
       postFetch(contact, ids)
 
     };
@@ -199,7 +199,7 @@ if (giveFromStorage === null) {
       //le - pour les noms composés, de 3 à 31 mots (commence par "/^" et termine par "$/"")
       const regex = /^[a-zA-Záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ\s-]{1,31}$/
       const regexAddress = /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ\s-]{1,60}$/
-      const regexEmail = /^[a-zA-Z0-9._-]+[@]{1}[a-zA-Z0-9._-]+[.]{1}[a-z]{2,4}$/
+      const regexEmail = /^[a-zA-Z0-9._-]+[@]{1}[a-zA-Z0-9._-]+[.]{1}[a-zA-Z]{2,4}$/
 
 
       //si erreur afficher message d'erreur, sinon accepter les données
@@ -260,7 +260,6 @@ if (giveFromStorage === null) {
       controlForm(valide);
       // si valide est différent de formulaire, alert
       if (valide != "") {
-        console.log(valide)
         alert("Merci de vérifier le formulaire");
       }
       else {

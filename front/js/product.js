@@ -56,14 +56,12 @@ function buttonClick() {
     quantity: Number(kanapQuantity),
   };
 
-  window.location.href = "cart.html"
-
 
   /********* Les conditions **************/
 
   // si la quantité est bonne
   if (Number(kanapQuantity) > 0 && Number(kanapQuantity) <= 100) {
-    alert(`L'ajout de quantité ${quantity.value} a été pris en compte`);
+    alert(`La quantité ${quantity.value} sélectionnés`);
 
     //si la couleur est choisie, on le met dans storage
     if (kanape.color !== "") {
@@ -77,25 +75,26 @@ function buttonClick() {
       }
       //on cherche dans le panier même id et même couleur
       const findProduct = myBasket.find((el) => el.id === idProduct && el.color === kanape.color);
-      console.log(findProduct);
-
+      
       //si ce produit existe 
       if (findProduct) {
         //on montre la quantité = quantité.value+ panier.quantité                                          
         let newQuantity = Number(kanapQuantity) + findProduct.quantity;
 
-        if(newQuantity >0 && newQuantity <=100){
+        if (newQuantity > 0 && newQuantity <= 100) {
           findProduct.quantity = newQuantity;
           localStorage.setItem("myBasket", JSON.stringify(myBasket));
-        }else {
-          alert ("Choisissez une quantité entre 1-100")
+          window.location.href = "cart.html"
+        } else {
+          alert("Vous avez déjà pris ce canapé")
         }
-        
+
       }
       else {
         // sinon, ajout du canapé au panier et on met le panier dans storage
         myBasket.push(kanape);
         localStorage.setItem("myBasket", JSON.stringify(myBasket));
+        window.location.href = "cart.html"
       }
     }
     else {
