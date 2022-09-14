@@ -70,7 +70,7 @@ function buttonClick() {
       //si le panier n'existe pas, on le créé, on push objet et on le met dans storage
       if (myBasket == null) {
         let myBasket = [];
-        //myBasket.push(kanape);
+        myBasket.push(kanape);
         localStorage.setItem("myBasket", JSON.stringify(myBasket));
       }
       //on cherche dans le panier même id et même couleur
