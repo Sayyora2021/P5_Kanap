@@ -71,7 +71,9 @@ function buttonClick() {
       if (myBasket == null) {
         let myBasket = [];
         myBasket.push(kanape);
+        console.log(myBasket)
         localStorage.setItem("myBasket", JSON.stringify(myBasket));
+        window.location.href = "cart.html"
       }
       //on cherche dans le panier même id et même couleur
       const findProduct = myBasket.find((el) => el.id === idProduct && el.color === kanape.color);
