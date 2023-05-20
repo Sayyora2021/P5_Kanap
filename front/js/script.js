@@ -6,23 +6,19 @@ fetch("http://localhost:3000/api/products")
   //récupération des données de lAPI dans response.json
   .then((response) => response.json())
   .then(function (value) {
-
-    //fonction reste à l'écout 
-    displayItems(value)
-    
-  })
-
+    //fonction reste à l'écout
+    displayItems(value);
+  });
 
 // appel de la fonction d'affichage
 const displayItems = function (value) {
-
-  //un boucle qui permet d'accéder et créer les éléments 
+  //un boucle qui permet d'accéder et créer les éléments
   for (let product of value) {
     let a = document.createElement("a");
-    a.href = `./product.html?id=${product._id}`
+    a.href = `./product.html?id=${product._id}`;
     itemsTag.appendChild(a);
-    
-    //creation des elements existants
+
+    //creation des elements existants dans html
     article = document.createElement("article");
     items.appendChild(article);
     a.appendChild(article);
@@ -45,4 +41,3 @@ const displayItems = function (value) {
     article.appendChild(p);
   }
 };
-
